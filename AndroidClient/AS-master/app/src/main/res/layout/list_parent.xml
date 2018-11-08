@@ -28,14 +28,23 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"/>
-        <ImageButton
+
+        <TextView
             android:id="@+id/expandRow"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:visibility="visible"
-            android:layout_margin="8dp"
-            android:src="@drawable/ic_arrow_forward"
+            android:layout_margin="@dimen/space_min"
+            android:background="@drawable/circle_accent_other"
+            android:gravity="center"
+            android:maxEms="1"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/user_name"
+            android:textStyle="bold"
+            android:text="A"
+            android:clickable="true"
+            android:onClick="onClick"
             />
     </RelativeLayout>>
 

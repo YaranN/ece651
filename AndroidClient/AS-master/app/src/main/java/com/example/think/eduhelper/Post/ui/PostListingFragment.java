@@ -9,9 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 
+import com.example.think.eduhelper.Chat.ui.Activities.ChatActivity;
+import com.example.think.eduhelper.Chat.utils.ItemClickSupport;
 import com.example.think.eduhelper.Post.model.ItemView.TitleChild;
 import com.example.think.eduhelper.Post.model.ItemView.TitleParent;
 import com.example.think.eduhelper.Post.core.getPost.GetPostConstractor;
@@ -19,13 +22,16 @@ import com.example.think.eduhelper.Post.core.getPost.GetPostPresenter;
 import com.example.think.eduhelper.Post.model.Post;
 import com.example.think.eduhelper.R;
 import com.example.think.eduhelper.Post.Adaptor.*;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PostListingFragment extends Fragment implements GetPostConstractor.View, SwipeRefreshLayout.OnRefreshListener  {
+public class PostListingFragment extends Fragment implements GetPostConstractor.View, SwipeRefreshLayout.OnRefreshListener,ItemClickSupport.OnItemClickListener {
     private RecyclerView mRecyclerViewAllPostsListing;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -85,16 +91,18 @@ public class PostListingFragment extends Fragment implements GetPostConstractor.
         List<TitleParent> parents = new ArrayList<>();
         for(Post post:posts){
             List<Object>  titleChildren = new ArrayList<>();
-            TitleParent parent = new TitleParent(post.getCourse(),post.getTitle());
+            TitleParent parent = new TitleParent(post.getCourse(),post.getTitle(),post.getTopic());
             TitleChild child = new TitleChild(post.getContent());
             titleChildren.add(child);
             parent.setChildrenList(titleChildren);
             parents.add(parent);
         }
-        mPostsListingRecyclerAdapter = new PostAdaptor(getContext(),parents);
+        mPostsListingRecyclerAdapter = new PostAdaptor(getContext(),parents,posts);
         mPostsListingRecyclerAdapter.setExpandCollapseListener(new ExpandableRecyclerAdapter.ExpandCollapseListener(){
             @Override
             public void onParentExpanded(int parentPosition) {
+                Post post = mPostsListingRecyclerAdapter.getPost(parentPosition);
+                Toast.makeText(getContext(),"Posted by "+ post.getUid(),Toast.LENGTH_LONG).show();
 
             }
 
@@ -128,4 +136,12 @@ public class PostListingFragment extends Fragment implements GetPostConstractor.
         mGetPostPresenter.getAllPosts();
     }
 
+    @Override
+    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
+        /*ChatActivity.startActivity(getActivity(),
+                mPostsListingRecyclerAdapter.getPost(position).email,
+                mPostsListingRecyclerAdapter.getPost(position).getUid(),
+                mPostsListingRecyclerAdapter.getPost(position).ge.firebaseToken);
+                */
+    }
 }

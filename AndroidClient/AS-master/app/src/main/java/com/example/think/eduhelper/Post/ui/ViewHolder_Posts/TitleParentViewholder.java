@@ -16,12 +16,12 @@ public class TitleParentViewholder extends ParentViewHolder {
      */
     public TextView courseName;
     public TextView subtitle;
-    public ImageButton bt_detail;
+    public TextView posterEmail;
     public TitleParentViewholder(@NonNull View itemView) {
         super(itemView);
         courseName = (TextView) itemView.findViewById(R.id.courseTitle);
         subtitle = (TextView) itemView.findViewById(R.id.parentTitle);
-        bt_detail = (ImageButton) itemView.findViewById(R.id.expandRow);
+        posterEmail = (TextView) itemView.findViewById(R.id.expandRow);
 
     }
 }

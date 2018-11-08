@@ -98,6 +98,9 @@ public class UsersFragment extends Fragment implements GetUsersContract.View, It
                 mUserListingRecyclerAdapter.getUser(position).firebaseToken);
     }
 
+
+
+
     @Override
     public void onGetAllUsersSuccess(List<User> users) {
         mSwipeRefreshLayout.post(new Runnable() {

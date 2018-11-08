@@ -11,14 +11,15 @@
         android:layout_height="150dp"
         android:scaleType="centerInside"
         android:src="@drawable/login_dialog"
-        android:background="@color/colorPrimary"
         android:padding="5dp"/>
 
     <EditText
         android:id="@+id/signupname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_small"
         android:ems="10"
+        android:maxLines="1"
         android:inputType="textPersonName"
         android:hint="UserName"
         android:layout_marginTop="20dp"/>
@@ -27,7 +28,9 @@
         android:id="@+id/signupemail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_small"
         android:ems="10"
+        android:maxLines="1"
         android:hint="Email"
         android:layout_marginTop="20dp"
         android:inputType="textEmailAddress"
@@ -36,6 +39,9 @@
         android:id="@+id/signuppassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_small"
+        android:maxLines="1"
+
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -43,8 +49,10 @@
         android:layout_marginTop="20dp"/>
 
     <Button
+        android:background="@color/button_register"
         android:id="@+id/bt_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_small"
         android:text="REGISTER" />
 </LinearLayout>

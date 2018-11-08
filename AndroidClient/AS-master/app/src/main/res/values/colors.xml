@@ -16,7 +16,7 @@
 
 
 
-
+    <color name="button_register">#f9e024</color>
     <color name="button_login">#bad64e</color>
     <color name="bubble_chat_mine">#bfe13f</color>
     <color name="bubble_chat_other">#fafafa</color>

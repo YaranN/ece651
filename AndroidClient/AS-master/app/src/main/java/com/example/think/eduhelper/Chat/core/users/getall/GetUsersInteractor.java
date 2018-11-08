@@ -1,6 +1,8 @@
 package com.example.think.eduhelper.Chat.core.users.getall;
 
 import android.text.TextUtils;
+
+import com.example.think.eduhelper.Chat.models.Chat;
 import com.example.think.eduhelper.Chat.models.User;
 import com.example.think.eduhelper.Chat.utils.Constants;
 import com.google.firebase.auth.FirebaseAuth;
@@ -50,26 +52,27 @@ public class GetUsersInteractor implements GetUsersContract.Interactor {
 
     @Override
     public void getChatUsersFromFirebase() {
-        /*FirebaseDatabase.getInstance().getReference().child(Constants.ARG_CHAT_ROOMS).addListenerForSingleValueEvent(new ValueEventListener() {
+        // store format in database is "Accepted"->"UID"->"accepted task posted" -> mutually added when post was accepted
+        FirebaseDatabase.getInstance().getReference().child(Constants.ARG_CHAT_ACCEPTED).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterator<DataSnapshot> dataSnapshots=dataSnapshot.getChildren().iterator();
-                List<User> users=new ArrayList<>();
+                List<User> accepted_users=new ArrayList<>();
                 while (dataSnapshots.hasNext()){
                     DataSnapshot dataSnapshotChild=dataSnapshots.next();
-                    dataSnapshotChild.getRef().
-                    Chat chat=dataSnapshotChild.getValue(Chat.class);
-                    if(chat.)4
-                    if(!TextUtils.equals(user.uid,FirebaseAuth.getInstance().getCurrentUser().getUid())) {
-                        users.add(user);
+                    User user = dataSnapshotChild.getValue(User.class);
+                    // followed could add more condition to justify whether the person should be shown in this page
+                    if (!TextUtils.equals(user.uid, FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                        accepted_users.add(user);
                     }
                 }
+                mOnGetAllUsersListener.onGetAllUsersSuccess(accepted_users);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-
+                mOnGetAllUsersListener.onGetAllUsersFailure(databaseError.getMessage());
             }
-        });*/
+        });
     }
 }

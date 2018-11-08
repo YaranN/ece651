@@ -11,9 +11,20 @@ public class TitleParent implements Parent<TitleChild> {
     private String title;
     private String mainTopic;
 
-    public TitleParent(String title, String mainTopic){
+
+    private String posterEmail;
+    public String getPosterEmail() {
+        return posterEmail;
+    }
+
+    public void setPosterEmail(String posterEmail) {
+        this.posterEmail = posterEmail;
+    }
+
+    public TitleParent(String title, String mainTopic, String posterEmail){
         this.title = title;
         this.mainTopic = mainTopic;
+        this.posterEmail = posterEmail;
         uuid = UUID.randomUUID();
     }
 
