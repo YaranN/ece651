@@ -16,5 +16,6 @@ public class Constants {
     public static final String ARG_SELECTED_POSTS_SUCCESSFULLY = "Mission accepted successfully";
 
     public static final String ARG_TUTORS= "tutors";
+    public static final String ARG_PROFILE="profile";
 
 }

@@ -1,4 +1,4 @@
-package com.example.think.eduhelper;
+package com.example.think.eduhelper.Profile.ui;
 
 import android.content.SharedPreferences;
 import android.media.Ringtone;
@@ -19,7 +19,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
-public class ProfileSetting extends AppCompatActivity {
+import com.example.think.eduhelper.Profile.ui.ProfileSettingFragment;
+import com.example.think.eduhelper.R;
+
+public class ProfileSettingActivity extends AppCompatActivity {
     private android.support.v7.widget.Toolbar toolbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +32,7 @@ public class ProfileSetting extends AppCompatActivity {
             if (savedInstanceState != null) {
                 return;
             }
-            getFragmentManager().beginTransaction().replace(R.id.fragment_container_preference, new Profile()).commit();
+            getFragmentManager().beginTransaction().replace(R.id.fragment_container_preference, new ProfileSettingFragment()).commit();
         }
         toolbar = findViewById(R.id.default_toolBar);
         setSupportActionBar(toolbar);

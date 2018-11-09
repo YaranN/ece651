@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.example.think.eduhelper.Chat.ui.Activities.UserListingActivity;
 import com.example.think.eduhelper.Post.ui.PostsListingActivity;
+import com.example.think.eduhelper.Profile.ui.ProfileSettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class AccountPage extends AppCompatActivity implements View.OnClickListener {
@@ -36,7 +37,7 @@ public class AccountPage extends AppCompatActivity implements View.OnClickListen
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.bt_profile:
-                startActivity(new Intent(this, ProfileSetting.class));
+                startActivity(new Intent(this, ProfileSettingActivity.class));
                 break;
             case R.id.bt_seekOrhelp:
                 startActivity(new Intent(this,PostsListingActivity.class));

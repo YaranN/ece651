@@ -5,7 +5,7 @@
         android:title="USER">
         <EditTextPreference
             android:icon="@mipmap/ic_launcher"
-            android:key="edit_text_name"
+            android:key="username"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="Setting your name here"
