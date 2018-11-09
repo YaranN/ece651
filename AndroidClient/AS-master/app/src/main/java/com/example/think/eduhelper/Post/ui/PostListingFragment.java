@@ -102,7 +102,7 @@ public class PostListingFragment extends Fragment implements GetPostConstractor.
             @Override
             public void onParentExpanded(int parentPosition) {
                 Post post = mPostsListingRecyclerAdapter.getPost(parentPosition);
-                Toast.makeText(getContext(),"Posted by "+ post.getUid(),Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Posted by "+ post.getUser().email,Toast.LENGTH_LONG).show();
 
             }
 
