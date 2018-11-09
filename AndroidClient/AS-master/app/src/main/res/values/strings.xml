@@ -76,4 +76,10 @@
     <string name="post_successfully_added">Post successfully added!</string>
     <string name="post_unable_to_add">Unable to add post!</string>
 
+    <string name="add_my_post_failure">Could not accept your own mission!</string>
+
+    <string name="Mission_accepted_successfully">Mission successfully accepted!</string>
+    <string name="Mission_accepted_fail">Unable to accepted the post!</string>
+
+
 </resources>

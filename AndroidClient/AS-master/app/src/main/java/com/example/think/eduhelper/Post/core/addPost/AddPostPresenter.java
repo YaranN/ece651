@@ -20,6 +20,11 @@ public class AddPostPresenter implements AddPostContractor.Presenter, AddPostCon
     }
 
     @Override
+    public void addSelectedPost(Context context, Post post) {
+        mAddPostInteractor.addSelectedPostToDatabase(context,post);
+    }
+
+    @Override
     public void onSuccess(String message) {
         mView.onAddPostSuccess(message);
     }

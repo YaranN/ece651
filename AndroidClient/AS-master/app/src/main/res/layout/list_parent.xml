@@ -43,8 +43,6 @@
             android:textColor="@color/user_name"
             android:textStyle="bold"
             android:text="A"
-            android:clickable="true"
-            android:onClick="onClick"
             />
     </RelativeLayout>>
 

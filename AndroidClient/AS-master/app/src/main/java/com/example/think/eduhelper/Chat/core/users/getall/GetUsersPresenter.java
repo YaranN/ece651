@@ -1,11 +1,12 @@
 package com.example.think.eduhelper.Chat.core.users.getall;
 
 import com.example.think.eduhelper.Chat.models.User;
+import com.example.think.eduhelper.Post.core.getPost.GetPostConstractor;
 
 import java.util.List;
 
 
-public class GetUsersPresenter implements GetUsersContract.Presenter, GetUsersContract.OnGetAllUsersListener {
+public class GetUsersPresenter implements GetUsersContract.Presenter, GetUsersContract.OnGetAllUsersListener, GetUsersContract.OnGetSelectedUsersListener {
     private GetUsersContract.View mView;
     private GetUsersInteractor mGetUsersInteractor;
 
@@ -20,8 +21,8 @@ public class GetUsersPresenter implements GetUsersContract.Presenter, GetUsersCo
     }
 
     @Override
-    public void getChatUsers() {
-        mGetUsersInteractor.getChatUsersFromFirebase();
+    public void getSelectedUsers() {
+        mGetUsersInteractor.getSelectedUsersFromFirebase();
     }
 
     @Override
@@ -32,5 +33,16 @@ public class GetUsersPresenter implements GetUsersContract.Presenter, GetUsersCo
     @Override
     public void onGetAllUsersFailure(String message) {
         mView.onGetAllUsersFailure(message);
+    }
+
+    @Override
+    public void onGetSelectedUsersSuccess(List<User> users) {
+        mView.onGetSelectedUsersSuccess(users);
+    }
+
+    @Override
+    public void onGetSelectedUsersFailure(String message) {
+        mView.onGetSelectedUsersFailure(message);
+
     }
 }

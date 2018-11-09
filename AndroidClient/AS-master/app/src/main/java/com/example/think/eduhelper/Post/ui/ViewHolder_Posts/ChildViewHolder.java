@@ -24,7 +24,6 @@ public class ChildViewHolder extends com.bignerdranch.expandablerecyclerview.Chi
         super(itemView);
         detailText = (TextView) itemView.findViewById(R.id.detail);
         accept = (Button) itemView.findViewById(R.id.bt_accept);
-
         String detail = detailText.getText().toString();
     }
 

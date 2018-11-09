@@ -1,6 +1,8 @@
 package com.example.think.eduhelper.Post.Adaptor;
 
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,23 +11,41 @@ import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 import com.example.think.eduhelper.Chat.models.User;
+import com.example.think.eduhelper.Post.core.addPost.AddPostContractor;
+import com.example.think.eduhelper.Post.core.addPost.AddPostPresenter;
 import com.example.think.eduhelper.Post.model.ItemView.TitleChild;
 import com.example.think.eduhelper.Post.model.ItemView.TitleParent;
 import com.example.think.eduhelper.Post.model.Post;
+import com.example.think.eduhelper.Post.ui.PostsListingActivity;
 import com.example.think.eduhelper.R;
 import com.example.think.eduhelper.Post.ui.ViewHolder_Posts.TitleParentViewholder;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
-public class PostAdaptor extends ExpandableRecyclerAdapter<TitleParent, TitleChild,TitleParentViewholder, com.example.think.eduhelper.Post.ui.ViewHolder_Posts.ChildViewHolder> {
+public class PostAdaptor extends ExpandableRecyclerAdapter<TitleParent, TitleChild,TitleParentViewholder, com.example.think.eduhelper.Post.ui.ViewHolder_Posts.ChildViewHolder>
+implements AddPostContractor.View{
     LayoutInflater layoutInflater;
     List<Post> posts;
     Context context;
+    private AddPostPresenter mAddPostPresenter;
+    private ProgressDialog mProgressDialog;
+    private FirebaseUser firebaseUser;
+
+
     public PostAdaptor(Context context, List<TitleParent> parentItemList, List<Post> posts){
         super(parentItemList);
         this.posts = posts;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
+
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        mAddPostPresenter = new AddPostPresenter(this);
+        mProgressDialog = new ProgressDialog(context);
+        mProgressDialog.setTitle(R.string.loading);
+        mProgressDialog.setMessage("Please wait....");
+        mProgressDialog.setIndeterminate(true);
     }
 
 
@@ -65,8 +85,24 @@ public class PostAdaptor extends ExpandableRecyclerAdapter<TitleParent, TitleChi
         childViewHolder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Post post = posts.get(parentPosition);
                 Toast.makeText(context, "You have selected "+posts.get(parentPosition).getTitle(), Toast.LENGTH_SHORT).show();
+                post.setStatus(true);
+                mAddPostPresenter.addSelectedPost(context,post);
             }
         });
+    }
+
+    @Override
+    public void onAddPostSuccess(String message) {
+        mProgressDialog.dismiss();
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+        //startActivity(new Intent(getContext(), PostsListingActivity.class));
+    }
+
+    @Override
+    public void onAddPostFailure(String message) {
+        mProgressDialog.dismiss();
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
     }
 }

@@ -12,4 +12,9 @@ public class Constants {
     public static final String ARG_UID = "uid";
     public static final String ARG_CHAT_ACCEPTED = "accepted";
     public static final String ARG_POSTS = "posts";
+    public static final String ARG_SELECTED_POSTS = "accepted";
+    public static final String ARG_SELECTED_POSTS_SUCCESSFULLY = "Mission accepted successfully";
+
+    public static final String ARG_TUTORS= "tutors";
+
 }

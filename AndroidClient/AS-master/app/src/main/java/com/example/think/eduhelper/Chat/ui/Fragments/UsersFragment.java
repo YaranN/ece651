@@ -86,7 +86,7 @@ public class UsersFragment extends Fragment implements GetUsersContract.View, It
         if (TextUtils.equals(getArguments().getString(ARG_TYPE), TYPE_CHATS)) {
 
         } else if (TextUtils.equals(getArguments().getString(ARG_TYPE), TYPE_ALL)) {
-            mGetUsersPresenter.getAllUsers();
+            mGetUsersPresenter.getSelectedUsers();
         }
     }
 
@@ -126,12 +126,27 @@ public class UsersFragment extends Fragment implements GetUsersContract.View, It
     }
 
     @Override
-    public void onGetChatUsersSuccess(List<User> users) {
-
+    public void onGetSelectedUsersSuccess(List<User> users) {
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+        mUserListingRecyclerAdapter = new UserListingRecyclerAdapter(users);
+        mRecyclerViewAllUserListing.setAdapter(mUserListingRecyclerAdapter);
+        mUserListingRecyclerAdapter.notifyDataSetChanged();
     }
 
     @Override
-    public void onGetChatUsersFailure(String message) {
-
+    public void onGetSelectedUsersFailure(String message) {
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(false);
+            }
+        });
+        Toast.makeText(getActivity(), "Error: " + message, Toast.LENGTH_SHORT).show();
     }
+
 }

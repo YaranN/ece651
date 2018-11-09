@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.think.eduhelper.Chat.models.User;
+import com.example.think.eduhelper.Chat.utils.Constants;
 import com.example.think.eduhelper.Post.core.addPost.AddPostContractor;
 import com.example.think.eduhelper.Post.core.addPost.AddPostPresenter;
 import com.example.think.eduhelper.Post.model.Post;
@@ -57,7 +59,9 @@ public class PostFragment extends Fragment implements View.OnClickListener, AddP
         String post_title = title.getText().toString();
         String post_detail = content.getText().toString();
         String post_topic = topic.getText().toString();
-        Post post = new Post(post_course, post_title,post_detail, firebaseUser.getUid(),System.currentTimeMillis(),post_topic);
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        User user = new User(firebaseUser.getUid(),firebaseUser.getEmail(),Constants.ARG_FIREBASE_TOKEN);
+        Post post = new Post(post_course, post_title,post_detail, firebaseUser.getUid(),System.currentTimeMillis(),post_topic, user);
         if (post_course.isEmpty() || post_title.isEmpty() || post_detail.isEmpty()) {
             Toast.makeText(getActivity(), "Please complete information", Toast.LENGTH_SHORT).show();
         } else {
