@@ -34,7 +34,9 @@ public class GetPostInteractor implements GetPostConstractor.Interactor {
                     DataSnapshot dataSnapshotChild = dataSnapshots.next();
                     Post post = dataSnapshotChild.getValue(Post.class);
                     // except yourself
-                    posts.add(post);
+                    if(!post.isStatus()) {
+                        posts.add(post);
+                    }
                 }
                 mOnGetAllPostsListener.onGetAllPostsSuccess(posts);
             }
