@@ -13,12 +13,15 @@ public interface AddPostContractor {
     interface Presenter {
         void addPost(Context context, Post post);
         void addSelectedPost(Context context, Post post);
+
+        void updatePostStatus(Context context, Post post);
     }
 
     interface Interactor {
         void addPostToDatabase(Context context, Post post);
 
         void addSelectedPostToDatabase(Context context, Post post);
+        void updatePostInDatabase(Context context, Post post);
 
     }
 

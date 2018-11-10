@@ -88,8 +88,8 @@ implements AddPostContractor.View{
                 Post post = posts.get(parentPosition);
                 Toast.makeText(context, "Edit operation in EditMyPostAdaptor.onBindChildViewHolder", Toast.LENGTH_SHORT).show();
                 post.setStatus(true);
+                mAddPostPresenter.updatePostStatus(context,post);
 
-                //mAddPostPresenter.addSelectedPost(context,post);
             }
         });
     }

@@ -81,6 +81,9 @@
     <string name="Mission_accepted_successfully">Mission successfully accepted!</string>
     <string name="Mission_accepted_fail">Unable to accepted the post!</string>
 
+    <string name="Post_updated_successfully">Post updated successfully!</string>
+    <string name="Post_updated_fail">Fail to update the post!</string>
+
     <string name="Add_to_poster_list_successfully">You have been added to poster message list!</string>
     <string name="Add_to_poster_list_fail">You are not in the message list yet!</string>
 

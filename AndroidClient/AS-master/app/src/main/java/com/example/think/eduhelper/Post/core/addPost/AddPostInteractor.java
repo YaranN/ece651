@@ -95,4 +95,23 @@ public class AddPostInteractor implements AddPostContractor.Interactor {
 
                 */
     }
+
+    @Override
+    public void updatePostInDatabase(final Context context, Post post) {
+        String postID = post.getUid()+"_"+post.getTimestamp();
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        database.child(Constants.ARG_POSTS)
+                    .child(postID)
+                    .setValue(post)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                mOnPostDatabaseListener.onSuccess(context.getString(R.string.Post_updated_successfully));
+                            } else {
+                                mOnPostDatabaseListener.onFailure(context.getString(R.string.Post_updated_fail));
+                            }
+                        }
+                    });
+    }
 }

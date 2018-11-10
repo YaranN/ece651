@@ -108,7 +108,13 @@ public class MyPostsFragment extends Fragment implements GetPostConstractor.View
             @Override
             public void onParentExpanded(int parentPosition) {
                 Post post = mPostsListingRecyclerAdapter.getPost(parentPosition);
-                Toast.makeText(getContext(),"Posted by "+ post.getUser().email,Toast.LENGTH_LONG).show();
+                String status;
+                if(post.isStatus()){
+                    status = "closed";
+                }else{
+                    status = "still Open";
+                }
+                Toast.makeText(getContext(),"This post is currently "+ status,Toast.LENGTH_LONG).show();
 
             }
 

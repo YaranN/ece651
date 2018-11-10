@@ -4,6 +4,8 @@ import android.content.Context;
 
 import com.example.think.eduhelper.Post.model.Post;
 
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class AddPostPresenter implements AddPostContractor.Presenter, AddPostContractor.OnPostDatabaseListener {
     private AddPostContractor.View mView;
     private AddPostInteractor mAddPostInteractor;
@@ -22,6 +24,11 @@ public class AddPostPresenter implements AddPostContractor.Presenter, AddPostCon
     @Override
     public void addSelectedPost(Context context, Post post) {
         mAddPostInteractor.addSelectedPostToDatabase(context,post);
+    }
+
+    @Override
+    public void updatePostStatus(Context context, Post post) {
+        mAddPostInteractor.updatePostInDatabase(context,post);
     }
 
     @Override
