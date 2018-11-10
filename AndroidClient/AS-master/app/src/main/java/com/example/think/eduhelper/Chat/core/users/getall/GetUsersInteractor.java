@@ -64,8 +64,8 @@ public class GetUsersInteractor implements GetUsersContract.Interactor {
                 Iterator<DataSnapshot> dataSnapshots=dataSnapshot.getChildren().iterator();
                 while (dataSnapshots.hasNext()){
                     DataSnapshot dataSnapshotChild=dataSnapshots.next();
-                    Post post = dataSnapshotChild.getValue(Post.class);
-                    User user = post.getUser();
+                    User user = dataSnapshotChild.getValue(User.class);
+                    //User user = post.getUser();
                     accepted_users.add(user);
                     // followed could add more condition to justify whether the person should be shown in this page
                 }

@@ -5,14 +5,14 @@ import com.bignerdranch.expandablerecyclerview.model.Parent;
 import java.util.List;
 import java.util.UUID;
 
-public class TitleParent implements Parent<TitleChild>{
+public class TitleParentMy implements Parent<TitleChildMy>{
     List<Object> childrenList;
     private UUID uuid;
     private String title;
     private String mainTopic;
-
-
     private String posterEmail;
+
+
     public String getPosterEmail() {
         return posterEmail;
     }
@@ -21,7 +21,7 @@ public class TitleParent implements Parent<TitleChild>{
         this.posterEmail = posterEmail;
     }
 
-    public TitleParent(String title, String mainTopic, String posterEmail){
+    public TitleParentMy(String title, String mainTopic, String posterEmail){
         this.title = title;
         this.mainTopic = mainTopic;
         this.posterEmail = posterEmail;

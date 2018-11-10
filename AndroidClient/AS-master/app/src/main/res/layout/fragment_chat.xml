@@ -22,7 +22,6 @@
         android:hint="Message..."
         android:imeOptions="actionSend"
         android:inputType="text"
-        android:maxLines="1"
         android:padding="5dp"
 
         />

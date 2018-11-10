@@ -40,6 +40,8 @@
         <activity
             android:name=".Chat.ui.Activities.UserListingActivity"
             android:parentActivityName=".AccountPage" />
+        <activity android:name=".Post.ui.MyPostsActivity"
+            android:parentActivityName=".AccountPage"></activity>
     </application>
 
 </manifest>

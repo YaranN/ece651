@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.think.eduhelper.Chat.ui.Activities.UserListingActivity;
+import com.example.think.eduhelper.Post.ui.MyPostsActivity;
 import com.example.think.eduhelper.Post.ui.PostsListingActivity;
 import com.example.think.eduhelper.Profile.ui.ProfileSettingActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -16,6 +17,10 @@ public class AccountPage extends AppCompatActivity implements View.OnClickListen
     private Button bt_seek;
     private Button bt_missions;
     private Button bt_logout;
+    private Button bt_message;
+    private Button bt_myPosts;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +36,12 @@ public class AccountPage extends AppCompatActivity implements View.OnClickListen
 
         bt_logout  = findViewById(R.id.bt_logOut);
         bt_logout.setOnClickListener(this);
+
+        bt_message = findViewById(R.id.bt_message);
+        bt_message.setOnClickListener(this);
+
+        bt_myPosts = findViewById(R.id.bt_myPosts);
+        bt_myPosts.setOnClickListener(this);
     }
 
     @Override
@@ -46,9 +57,19 @@ public class AccountPage extends AppCompatActivity implements View.OnClickListen
                 startActivity(new Intent(this,UserListingActivity.class));
                 break;
             case R.id.bt_logOut:
+                // signing out here
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(this,MainActivity.class));
                 break;
+
+            case R.id.bt_message:
+                startActivity(new Intent(this,UserListingActivity.class));
+                break;
+
+            case R.id.bt_myPosts:
+                startActivity(new Intent(this,MyPostsActivity.class));
+                break;
+
         }
     }
 

@@ -25,8 +25,11 @@
     <color name="bubble_border">#0a0a09</color>
     <color name="bubble_notification">#e41b28</color>
     <color name="white">#fffdfd</color>
+    <color name="button_edit">#b3aa67</color>
 
     <color name="button_accepted">#4a8ec6</color>
     <color name="button_logout">#bf2f36</color>
+    <color name="button_message">#897dc9</color>
+    <color name="button_myPosts">#a7a6af</color>
 
 </resources>

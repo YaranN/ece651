@@ -47,12 +47,14 @@ public class AddPostInteractor implements AddPostContractor.Interactor {
         String userID = firebaseUser.getUid();
         String userEmail = firebaseUser.getEmail();
         String databaseToken = Constants.ARG_FIREBASE_TOKEN;
+        User currUser = new User(userID,userEmail,databaseToken);
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+        // excluded those who want to accept their own post
         if(!TextUtils.equals(post.getUid(), FirebaseAuth.getInstance().getCurrentUser().getUid())){
             database.child(Constants.ARG_SELECTED_POSTS)
                     .child(userID)
                     .child(post.getUid()+"_"+post.getTimestamp())
-                    .setValue(post)
+                    .setValue(post.getUser())
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -60,6 +62,23 @@ public class AddPostInteractor implements AddPostContractor.Interactor {
                                 mOnPostDatabaseListener.onSuccess(context.getString(R.string.Mission_accepted_successfully));
                             } else {
                                 mOnPostDatabaseListener.onFailure(context.getString(R.string.post_unable_to_add));
+                            }
+                        }
+                    });
+
+            // add current user to the database of posters' message list, may rearrange the structure here
+            // to avoid duplication
+            database.child(Constants.ARG_SELECTED_POSTS)
+                    .child(post.getUid())
+                    .child(post.getUid()+"_"+post.getTimestamp())
+                    .setValue(userID)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                mOnPostDatabaseListener.onSuccess(context.getString(R.string.Add_to_poster_list_successfully));
+                            } else {
+                                mOnPostDatabaseListener.onFailure(context.getString(R.string.Add_to_poster_list_fail));
                             }
                         }
                     });

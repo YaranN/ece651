@@ -12,18 +12,17 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
-
-import com.example.think.eduhelper.Chat.ui.Activities.ChatActivity;
 import com.example.think.eduhelper.Chat.utils.ItemClickSupport;
-import com.example.think.eduhelper.Post.model.ItemView.TitleChild;
-import com.example.think.eduhelper.Post.model.ItemView.TitleParent;
+import com.example.think.eduhelper.Post.Adaptor.EditMyPostAdaptor;
+import com.example.think.eduhelper.Post.Adaptor.PostAdaptor;
 import com.example.think.eduhelper.Post.core.getPost.GetPostConstractor;
 import com.example.think.eduhelper.Post.core.getPost.GetPostPresenter;
+import com.example.think.eduhelper.Post.model.ItemView.TitleChild;
+import com.example.think.eduhelper.Post.model.ItemView.TitleChildMy;
+import com.example.think.eduhelper.Post.model.ItemView.TitleParent;
+import com.example.think.eduhelper.Post.model.ItemView.TitleParentMy;
 import com.example.think.eduhelper.Post.model.Post;
 import com.example.think.eduhelper.R;
-import com.example.think.eduhelper.Post.Adaptor.*;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,17 +30,13 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PostListingFragment extends Fragment implements GetPostConstractor.View, SwipeRefreshLayout.OnRefreshListener,ItemClickSupport.OnItemClickListener {
-    private RecyclerView mRecyclerViewAllPostsListing;
+public class MyPostsFragment extends Fragment implements GetPostConstractor.View, SwipeRefreshLayout.OnRefreshListener,ItemClickSupport.OnItemClickListener {
+    private RecyclerView mRecyclerViewMyPostsListing;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
-    private PostAdaptor mPostsListingRecyclerAdapter;
-
+    private EditMyPostAdaptor mPostsListingRecyclerAdapter;
     private GetPostPresenter mGetPostPresenter;
 
-
-
-    public PostListingFragment() {
+    public MyPostsFragment() {
         // Required empty public constructor
     }
 
@@ -50,16 +45,17 @@ public class PostListingFragment extends Fragment implements GetPostConstractor.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_post_listing, container, false);
+        View view =  inflater.inflate(R.layout.fragment_my_posts, container, false);
         bindViews(view);
         init();
-        Toast.makeText(getContext(),"In GetPostInteractor.getAllPostsFromFirebase() you could arrange the sequence of the posts",Toast.LENGTH_LONG).show();
         return view;
     }
 
-    public void bindViews(View v){
-        mRecyclerViewAllPostsListing = v.findViewById(R.id.post_listing_recyclerview);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) v.findViewById(R.id.swipe_refresh_posts_layout);
+
+    private void bindViews(View view){
+        mRecyclerViewMyPostsListing = view.findViewById(R.id.myPost_listing_recyclerview);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_myPosts_layout);
+
     }
 
     public void init(){
@@ -70,16 +66,23 @@ public class PostListingFragment extends Fragment implements GetPostConstractor.
                 mSwipeRefreshLayout.setRefreshing(true);
             }
         });
-        getPosts();
-        mRecyclerViewAllPostsListing.setLayoutManager(new LinearLayoutManager(getContext()));
+        getMyPosts();
+        mRecyclerViewMyPostsListing.setLayoutManager(new LinearLayoutManager(getContext()));
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
     }
 
+    public void getMyPosts(){
+        mGetPostPresenter.getMyPosts();
+    }
+
     @Override
     public void onRefresh() {
-        getPosts();
-        Toast.makeText(getContext(),"In GetPostInteractor.getAllPostsFromFirebase() you could arrange the sequence of the posts",Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
 
     }
 
@@ -91,16 +94,16 @@ public class PostListingFragment extends Fragment implements GetPostConstractor.
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
-        List<TitleParent> parents = new ArrayList<>();
+        List<TitleParentMy> parents = new ArrayList<>();
         for(Post post:posts){
             List<Object>  titleChildren = new ArrayList<>();
-            TitleParent parent = new TitleParent(post.getCourse(),post.getTitle(),post.getTopic());
-            TitleChild child = new TitleChild(post.getContent());
+            TitleParentMy parent = new TitleParentMy(post.getCourse(),post.getTitle(),post.getTopic());
+            TitleChildMy child = new TitleChildMy(post.getContent());
             titleChildren.add(child);
             parent.setChildrenList(titleChildren);
             parents.add(parent);
         }
-        mPostsListingRecyclerAdapter = new PostAdaptor(getContext(),parents,posts);
+        mPostsListingRecyclerAdapter = new EditMyPostAdaptor(getContext(),parents,posts);
         mPostsListingRecyclerAdapter.setExpandCollapseListener(new ExpandableRecyclerAdapter.ExpandCollapseListener(){
             @Override
             public void onParentExpanded(int parentPosition) {
@@ -116,8 +119,7 @@ public class PostListingFragment extends Fragment implements GetPostConstractor.
         });
 
 
-
-        mRecyclerViewAllPostsListing.setAdapter(mPostsListingRecyclerAdapter);
+        mRecyclerViewMyPostsListing.setAdapter(mPostsListingRecyclerAdapter);
         mPostsListingRecyclerAdapter.notifyDataSetChanged();
     }
 
@@ -126,17 +128,4 @@ public class PostListingFragment extends Fragment implements GetPostConstractor.
 
     }
 
-
-    public void getPosts(){
-        mGetPostPresenter.getAllPosts();
-    }
-
-    @Override
-    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-        /*ChatActivity.startActivity(getActivity(),
-                mPostsListingRecyclerAdapter.getPost(position).email,
-                mPostsListingRecyclerAdapter.getPost(position).getUid(),
-                mPostsListingRecyclerAdapter.getPost(position).ge.firebaseToken);
-                */
-    }
 }

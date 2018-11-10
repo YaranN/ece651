@@ -9,22 +9,22 @@ public interface GetPostConstractor {
         void onGetAllPostsSuccess(List<Post> posts);
 
         void onGetAllPostsFailure(String message);
-
-        void onGetSelectedPostsSuccess(List<Post> posts);
-
-        void onGetSelectedPostssFailure(String message);
     }
 
     interface Presenter {
         void getAllPosts();
 
-        void getChatPosts();
+        void getMyPosts();
+
     }
 
     interface Interactor {
+        // get
         void getAllPostsFromFirebase();
 
-        void getSelectedPostsFromFirebase();
+        void getMyPostsFromFirebase();
+
+
     }
 
     interface OnGetAllPostsListener {
@@ -33,9 +33,4 @@ public interface GetPostConstractor {
         void onGetAllPostsFailure(String message);
     }
 
-    interface OnGetSelectedPostsListener {
-        void onGetSelectedPostsSuccess(List<Post> posts);
-
-        void onGetSelectedPostsFailure(String message);
-    }
 }

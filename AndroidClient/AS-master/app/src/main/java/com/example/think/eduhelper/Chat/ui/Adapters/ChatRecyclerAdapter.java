@@ -1,11 +1,13 @@
 package com.example.think.eduhelper.Chat.ui.Adapters;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.think.eduhelper.Chat.models.Chat;
 import com.example.think.eduhelper.R;
@@ -17,11 +19,12 @@ import java.util.List;
 public class ChatRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private static final int VIEW_TYPE_ME = 1;
     private static final int VIEW_TYPE_OTHER = 2;
-
+    private static  Context context;
     private List<Chat> mChats;
 
-    public ChatRecyclerAdapter(List<Chat> chats) {
+    public ChatRecyclerAdapter(List<Chat> chats, Context context) {
         mChats = chats;
+        this.context = context;
     }
 
     public void add(Chat chat) {
@@ -67,11 +70,17 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void configureOtherChatViewHolder(OtherChatViewHolder otherChatViewHolder, int position) {
         Chat chat = mChats.get(position);
-
         String alphabet = chat.sender.substring(0, 1);
 
         otherChatViewHolder.txtChatMessage.setText(chat.message);
         otherChatViewHolder.txtUserAlphabet.setText(alphabet);
+
+        otherChatViewHolder.txtUserAlphabet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context,"Here(Chat Fragment configureOtherChatViewHolder) to handle the click operation of the user",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

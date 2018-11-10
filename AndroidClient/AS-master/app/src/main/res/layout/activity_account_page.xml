@@ -20,7 +20,7 @@
         android:id="@+id/bt_profile"
         android:layout_width="250dp"
         android:layout_gravity="center"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/account_page_button_height"
         android:layout_marginTop="50dp"
         android:text="Profile"
         android:textStyle="bold"
@@ -32,18 +32,31 @@
         android:id="@+id/bt_message"
         android:layout_width="250dp"
         android:layout_gravity="center"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/account_page_button_height"
         android:layout_marginTop="10dp"
+        android:background="@color/button_message"
         android:text="Message"
         android:textStyle="bold"
         android:textSize="18dp"
         />
 
     <Button
+        android:id="@+id/bt_myPosts"
+        android:layout_width="250dp"
+        android:layout_gravity="center"
+        android:layout_height="@dimen/account_page_button_height"
+        android:layout_marginTop="10dp"
+        android:text="MY POSTS"
+        android:textStyle="bold"
+        android:textSize="18dp"
+        android:background="@color/button_myPosts"
+        />
+
+    <Button
         android:id="@+id/bt_missions"
         android:layout_width="250dp"
         android:layout_gravity="center"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/account_page_button_height"
         android:layout_marginTop="10dp"
         android:text="Accepted"
         android:textStyle="bold"
@@ -54,7 +67,7 @@
     <Button
         android:id="@+id/bt_seekOrhelp"
         android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/account_page_button_height"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:background="@android:color/holo_green_light"
@@ -65,7 +78,7 @@
     <Button
         android:id="@+id/bt_logOut"
         android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_height="@dimen/account_page_button_height"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:background="@color/button_logout"

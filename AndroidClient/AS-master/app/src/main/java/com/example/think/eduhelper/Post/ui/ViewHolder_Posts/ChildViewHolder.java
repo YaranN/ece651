@@ -11,7 +11,7 @@ import com.example.think.eduhelper.Chat.utils.ItemClickSupport;
 import com.example.think.eduhelper.Post.model.Post;
 import com.example.think.eduhelper.R;
 
-public class ChildViewHolder extends com.bignerdranch.expandablerecyclerview.ChildViewHolder implements ItemClickSupport.OnItemClickListener {
+public class ChildViewHolder extends com.bignerdranch.expandablerecyclerview.ChildViewHolder {
     /**
      * Default constructor.
      *
@@ -27,8 +27,4 @@ public class ChildViewHolder extends com.bignerdranch.expandablerecyclerview.Chi
         String detail = detailText.getText().toString();
     }
 
-    @Override
-    public void onItemClicked(RecyclerView recyclerView, int position, View v) {
-
-    }
 }

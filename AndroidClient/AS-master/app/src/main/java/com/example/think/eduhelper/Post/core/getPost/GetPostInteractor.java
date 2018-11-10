@@ -47,7 +47,29 @@ public class GetPostInteractor implements GetPostConstractor.Interactor {
     }
 
     @Override
-    public void getSelectedPostsFromFirebase() {
+    public void getMyPostsFromFirebase() {
+        final String curr_UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child(Constants.ARG_POSTS).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterator<DataSnapshot> dataSnapshots = dataSnapshot.getChildren().iterator();
+                List<Post> posts = new ArrayList<>();
+                while (dataSnapshots.hasNext()) {
+                    DataSnapshot dataSnapshotChild = dataSnapshots.next();
+                    Post post = dataSnapshotChild.getValue(Post.class);
+                    // except yourself
+                    if(TextUtils.equals(post.getUid(), curr_UID)){
+                        posts.add(post);
+                    }
+                }
+                mOnGetAllPostsListener.onGetAllPostsSuccess(posts);
+            }
 
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                mOnGetAllPostsListener.onGetAllPostsFailure(databaseError.getMessage());
+            }
+        });
     }
+
 }
