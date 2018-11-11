@@ -3,6 +3,9 @@ package com.example.think.eduhelper.Post.Adaptor;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,16 +14,14 @@ import android.widget.Toast;
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 import com.example.think.eduhelper.Post.core.addPost.AddPostContractor;
 import com.example.think.eduhelper.Post.core.addPost.AddPostPresenter;
-import com.example.think.eduhelper.Post.model.ItemView.TitleChild;
 import com.example.think.eduhelper.Post.model.ItemView.TitleChildMy;
 import com.example.think.eduhelper.Post.model.ItemView.TitleParentMy;
 
 import com.example.think.eduhelper.Post.model.Post;
 import com.example.think.eduhelper.Post.ui.ViewHolder_Posts.EditMyPostChildViewHolder;
+import com.example.think.eduhelper.Post.ui.EditPostFragment;
 import com.example.think.eduhelper.Post.ui.ViewHolder_Posts.TitleParentViewholder;
 import com.example.think.eduhelper.R;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -31,7 +32,7 @@ implements AddPostContractor.View{
     Context context;
     private AddPostPresenter mAddPostPresenter;
     private ProgressDialog mProgressDialog;
-    private FirebaseUser firebaseUser;
+
 
 
     public EditMyPostAdaptor(Context context, List<TitleParentMy> parentItemList, List<Post> posts){
@@ -39,8 +40,6 @@ implements AddPostContractor.View{
         this.posts = posts;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
-
-        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         mAddPostPresenter = new AddPostPresenter(this);
         mProgressDialog = new ProgressDialog(context);
         mProgressDialog.setTitle(R.string.loading);
@@ -90,6 +89,18 @@ implements AddPostContractor.View{
                 post.setStatus(true);
                 mAddPostPresenter.updatePostStatus(context,post);
 
+            }
+        });
+
+        childViewHolder.edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Post post = posts.get(parentPosition);
+                EditPostFragment editPostFragment=  EditPostFragment.newInstance(post.getCourse(),post.getTitle(),post.getContent(),post.getTopic(),(long)post.getTimestamp());
+                FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.my_posts_listing_container,editPostFragment,null).addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
     }

@@ -18,4 +18,12 @@ public class Constants {
     public static final String ARG_TUTORS= "tutors";
     public static final String ARG_PROFILE="profile";
 
+
+    public static final String ARG_COURSE= "course";
+    public static final String ARG_TOPIC= "topic";
+    public static final String ARG_CONTENT= "content";
+    public static final String ARG_TITLE= "title";
+    public static final String ARG_EMAIL= "email";
+    public static final String ARG_TIMESTAMP= "timestamp";
+
 }

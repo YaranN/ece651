@@ -3,6 +3,7 @@ package com.example.think.eduhelper.Post.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,6 +36,7 @@ public class MyPostsFragment extends Fragment implements GetPostConstractor.View
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private EditMyPostAdaptor mPostsListingRecyclerAdapter;
     private GetPostPresenter mGetPostPresenter;
+    private FragmentManager fragmentManager;
 
     public MyPostsFragment() {
         // Required empty public constructor
