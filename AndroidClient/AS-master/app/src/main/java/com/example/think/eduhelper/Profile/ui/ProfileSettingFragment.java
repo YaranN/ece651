@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceFragment;
 import android.preference.Preference;
 import android.support.v7.preference.EditTextPreference;
+import android.util.Pair;
 import android.view.View;
 import android.widget.Toast;
 
@@ -17,7 +18,9 @@ import com.example.think.eduhelper.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class ProfileSettingFragment extends PreferenceFragment implements UpdateProfileContract.onProfileDatabaseListener, UpdateProfileContract.View {
+import java.util.List;
+
+public class ProfileSettingFragment extends PreferenceFragment implements UpdateProfileContract.View {
     private Preference editTextPreference;
     public SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener;
     private FirebaseUser firebaseUser;
@@ -37,6 +40,8 @@ public class ProfileSettingFragment extends PreferenceFragment implements Update
         init();
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.profilepreference);
+        mUpdateProfilePresenter.getProfile(getActivity(), firebaseUser.getUid());
+
         preferenceChangeListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             @Override
             public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
@@ -83,13 +88,13 @@ public class ProfileSettingFragment extends PreferenceFragment implements Update
     }
 
     @Override
-    public void onSuccess(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
-
+    public void onGetProfileSuccess(List<Pair<String, String>> userProfile) {
+        android.preference.Preference preference;
+        for (Pair<String, String> infoPair: userProfile) {
+            String key= infoPair.first;
+            preference = findPreference(key);
+            preference.setSummary(infoPair.second);
+        }
     }
 
-    @Override
-    public void onFailure(String message) {
-        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT);
-    }
 }
