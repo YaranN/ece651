@@ -33,11 +33,8 @@ import java.util.ArrayList;
 public class ChatFragment extends Fragment implements ChatContract.View, TextView.OnEditorActionListener{
     private RecyclerView mRecyclerViewChat;
     private EditText mETxtMessage;
-
     private ProgressDialog mProgressDialog;
-
     private ChatRecyclerAdapter mChatRecyclerAdapter;
-
     private ChatPresenter mChatPresenter;
 
     public static ChatFragment newInstance(String receiver,
@@ -112,6 +109,7 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
         String sender = FirebaseAuth.getInstance().getCurrentUser().getEmail();
         String senderUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         String receiverFirebaseToken = getArguments().getString(Constants.ARG_FIREBASE_TOKEN);
+        if(!message.isEmpty()){
         Chat chat = new Chat(sender,
                 receiver,
                 senderUid,
@@ -121,6 +119,9 @@ public class ChatFragment extends Fragment implements ChatContract.View, TextVie
         mChatPresenter.sendMessage(getActivity().getApplicationContext(),
                 chat,
                 receiverFirebaseToken);
+        }else{
+            Toast.makeText(getContext(),"Could not send empty message...",Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override

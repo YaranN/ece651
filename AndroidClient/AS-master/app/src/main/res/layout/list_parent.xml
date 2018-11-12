@@ -16,7 +16,8 @@
             android:text="ECE650"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/expandRow"/>
 
         <TextView
             android:id="@+id/parentTitle"
@@ -24,17 +25,17 @@
             android:textStyle="bold"
             android:text="Problem with Android studio version"
             android:singleLine="true"
-            android:layout_marginLeft="60dp"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"/>
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/courseTitle"/>
 
         <TextView
             android:id="@+id/expandRow"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
             android:layout_margin="@dimen/space_min"
             android:background="@drawable/circle_accent_other"
             android:gravity="center"
