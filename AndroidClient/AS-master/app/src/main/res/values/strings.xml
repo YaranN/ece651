@@ -90,5 +90,6 @@
     <string name="profile_successfully_updated">Profile successfully added!</string>
     <string name="profile_unable_to_update">Unable to add profile!</string>
 
+    <string name="close_post_warning">"Do you really want to close the post?"</string>>
 
 </resources>

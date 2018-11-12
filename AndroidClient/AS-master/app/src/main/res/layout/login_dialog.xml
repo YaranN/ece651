@@ -4,31 +4,45 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <ImageView
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="@dimen/post_cancel_bar"
         android:scaleType="centerInside"
         android:src="@drawable/login_dialog"
         android:background="@color/colorPrimary"
-        android:padding="5dp"/>
+        android:padding="5dp"
+        android:text="Close Post"
+        android:gravity="center"
+        android:textStyle="bold" />
 
-    <EditText
-        android:id="@+id/editText_LoginName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="sggkjihua"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textPersonName"
-        android:layout_marginTop="20dp"/>
 
-    <EditText
-        android:id="@+id/editText_LoginPassword"
+    <TextView
+        android:id="@+id/show_close"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:text="202020"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:layout_marginTop="20dp"/>
+        android:text= "@string/close_post_warning"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textSize="20dp"/>
+    <TextView
+        android:id="@+id/cancel_post_course"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ECE650"
+        android:padding="@dimen/space_small"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textColor="@color/red"/>
+
+    <TextView
+        android:id="@+id/cancel_post_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text="New to java"
+        android:padding="@dimen/space_small"
+        android:gravity="center"
+        android:textSize="15dp"
+        android:textStyle="normal"/>
 </LinearLayout>
