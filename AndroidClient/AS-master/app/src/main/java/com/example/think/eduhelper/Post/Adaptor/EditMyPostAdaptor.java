@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
+import com.example.think.eduhelper.Post.ui.ClosePostDialog;
 import com.example.think.eduhelper.Post.core.addPost.AddPostContractor;
 import com.example.think.eduhelper.Post.core.addPost.AddPostPresenter;
 import com.example.think.eduhelper.Post.model.ItemView.TitleChildMy;
@@ -74,7 +75,6 @@ implements AddPostContractor.View{
         parentViewHolder.courseName.setText(titleParentMy.getTitle());
         parentViewHolder.subtitle.setText(titleParentMy.getMaintopic());
         parentViewHolder.posterEmail.setText(category);
-        // 可以在这里把那个按钮加进来，这样应该可以
     }
 
     @Override
@@ -87,7 +87,11 @@ implements AddPostContractor.View{
                 Post post = posts.get(parentPosition);
                 Toast.makeText(context, "Edit operation in EditMyPostAdaptor.onBindChildViewHolder", Toast.LENGTH_SHORT).show();
                 post.setStatus(true);
-                mAddPostPresenter.updatePostStatus(context,post);
+                ClosePostDialog closePostDialog = new ClosePostDialog();
+                closePostDialog.init(mAddPostPresenter,context,post);
+                FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
+                closePostDialog.show(fragmentManager, "Open the cancel dialog...");
+                //mAddPostPresenter.updatePostStatus(context,post);
 
             }
         });

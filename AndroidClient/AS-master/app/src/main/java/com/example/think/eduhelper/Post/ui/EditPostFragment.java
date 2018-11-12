@@ -30,7 +30,6 @@ public class EditPostFragment extends Fragment implements View.OnClickListener, 
     private FirebaseUser firebaseUser;
     private Button bt_edit_post_confirm;
     private long timestamp;
-    private String email, uid;
 
     public static EditPostFragment newInstance(String course, String title, String content, String topic, long timestamp) {
         EditPostFragment fragment = new EditPostFragment();

@@ -11,9 +11,10 @@
         android:src="@drawable/login_dialog"
         android:background="@color/colorPrimary"
         android:padding="5dp"
-        android:text="Close Post"
+        android:text="Close the Post"
         android:gravity="center"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="24dp"/>
 
 
     <TextView
@@ -25,6 +26,15 @@
         android:textStyle="bold"
         android:gravity="center"
         android:textSize="20dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:text= "@string/close_post_warning2"
+        android:textStyle="normal"
+        android:gravity="center"
+        android:textSize="16dp"/>
     <TextView
         android:id="@+id/cancel_post_course"
         android:layout_width="match_parent"
