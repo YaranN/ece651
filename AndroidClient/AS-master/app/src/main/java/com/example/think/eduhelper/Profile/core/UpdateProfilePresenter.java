@@ -1,6 +1,9 @@
 package com.example.think.eduhelper.Profile.core;
 
 import android.content.Context;
+import android.util.Pair;
+
+import java.util.List;
 
 public class UpdateProfilePresenter implements UpdateProfileContract.Presenter, UpdateProfileContract.onProfileDatabaseListener {
     private UpdateProfileContract.View mView;
@@ -17,6 +20,11 @@ public class UpdateProfilePresenter implements UpdateProfileContract.Presenter, 
     }
 
     @Override
+    public void getProfile(Context context, String uid) {
+        mUpdateProfileInteractor.getProfileFromDatabase(context, uid);
+    }
+
+    @Override
     public void onSuccess(String message) {
         mView.onUpdateProfileSuccess(message);
     }
@@ -24,6 +32,11 @@ public class UpdateProfilePresenter implements UpdateProfileContract.Presenter, 
     @Override
     public void onFailure(String message) {
         mView.onUpdateProfileFailure(message);
+    }
+
+    @Override
+    public void onGetUserProfile(List<Pair<String, String>> userProfile) {
+        mView.onGetProfileSuccess(userProfile);
     }
 
 }
