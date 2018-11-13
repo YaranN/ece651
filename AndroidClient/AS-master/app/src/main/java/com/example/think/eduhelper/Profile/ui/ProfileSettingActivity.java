@@ -42,7 +42,6 @@ public class ProfileSettingActivity extends AppCompatActivity {
     }
 
     public static class Profile extends PreferenceFragment {
-        private Preference editTextPreference;
         public SharedPreferences.OnSharedPreferenceChangeListener preferenceChangeListener;
 
         @Override

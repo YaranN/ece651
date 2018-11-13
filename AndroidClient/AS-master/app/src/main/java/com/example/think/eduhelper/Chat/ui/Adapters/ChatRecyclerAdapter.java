@@ -1,6 +1,7 @@
 package com.example.think.eduhelper.Chat.ui.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.think.eduhelper.Chat.models.Chat;
+import com.example.think.eduhelper.Profile.ui.ShowOtherProfileActivity;
 import com.example.think.eduhelper.R;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -69,9 +71,9 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     }
 
     private void configureOtherChatViewHolder(OtherChatViewHolder otherChatViewHolder, int position) {
-        Chat chat = mChats.get(position);
+        final Chat chat = mChats.get(position);
         String alphabet = chat.sender.substring(0, 1);
-
+        final String uid = chat.senderUid;
         otherChatViewHolder.txtChatMessage.setText(chat.message);
         otherChatViewHolder.txtUserAlphabet.setText(alphabet);
 
@@ -79,6 +81,9 @@ public class ChatRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             @Override
             public void onClick(View v) {
                 Toast.makeText(context,"Here(Chat Fragment configureOtherChatViewHolder) to handle the click operation of the user",Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(context, ShowOtherProfileActivity.class);
+                intent.putExtra("uid",uid);
+                context.startActivity(intent);
             }
         });
     }

@@ -34,7 +34,7 @@ public class MyPostsActivity extends AppCompatActivity {
             MyPostsFragment myPostsFragment = new MyPostsFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.my_posts_listing_container, myPostsFragment,null);
+            fragmentTransaction.add(R.id.my_posts_listing_container, myPostsFragment,null).addToBackStack("MyPostsPage");
             fragmentTransaction.commit();
         }
 

@@ -103,7 +103,7 @@ implements AddPostContractor.View{
                 EditPostFragment editPostFragment=  EditPostFragment.newInstance(post.getCourse(),post.getTitle(),post.getContent(),post.getTopic(),(long)post.getTimestamp());
                 FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.my_posts_listing_container,editPostFragment,null).addToBackStack(null);
+                fragmentTransaction.replace(R.id.my_posts_listing_container,editPostFragment,null).addToBackStack("EditFragment");
                 fragmentTransaction.commit();
             }
         });

@@ -4,6 +4,7 @@ package com.example.think.eduhelper.Post.ui;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -113,15 +114,19 @@ public class EditPostFragment extends Fragment implements View.OnClickListener, 
         String post_topic = edit_topic.getText().toString();
 
         User user = new User(firebaseUser.getUid(),firebaseUser.getEmail(),Constants.ARG_FIREBASE_TOKEN);
-        Post post = new Post(post_course, post_title,post_detail, firebaseUser.getUid(),timestamp,post_topic, user);
+        Post post = new Post(post_course, post_title, post_detail, firebaseUser.getUid(),timestamp,post_topic, user);
         if (post_course.isEmpty() || post_title.isEmpty() || post_detail.isEmpty()) {
             Toast.makeText(getActivity(), "Please complete information", Toast.LENGTH_SHORT).show();
         } else {
             mProgressDialog.show();
             mAddPostPresenter.addPost(getActivity(),post);
-            //mRegisterPresenter.register(SignUpActivity.this, userEmail, userPassword);
+            edit_course.setText("");
+            edit_title.setText("");
+            edit_content.setText("");
+            edit_topic.setText("");
+            //FragmentManager fm = getActivity().getSupportFragmentManager();
+            //fm.popBackStack();
         }
-        Toast.makeText(getActivity(), "Please complete information", Toast.LENGTH_SHORT).show();
     }
 
 

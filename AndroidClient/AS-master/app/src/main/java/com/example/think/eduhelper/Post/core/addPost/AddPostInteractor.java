@@ -71,7 +71,7 @@ public class AddPostInteractor implements AddPostContractor.Interactor {
             database.child(Constants.ARG_SELECTED_POSTS)
                     .child(post.getUid())
                     .child(post.getUid()+"_"+post.getTimestamp())
-                    .setValue(userID)
+                    .setValue(currUser)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -92,7 +92,6 @@ public class AddPostInteractor implements AddPostContractor.Interactor {
                 .child(post.getUid())
                 .child(post.getUid()+"_"+post.getTimestamp())
                 .child().setValue(tutor);
-
                 */
     }
 
