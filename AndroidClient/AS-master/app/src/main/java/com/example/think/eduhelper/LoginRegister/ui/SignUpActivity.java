@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.think.eduhelper.AccountPage;
 import com.example.think.eduhelper.Chat.ui.Activities.UserListingActivity;
 import com.example.think.eduhelper.LoginRegister.core.registration.RegisterContract;
 import com.example.think.eduhelper.LoginRegister.core.registration.RegisterPresenter;
@@ -115,8 +116,9 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onAddUserSuccess(String message) {
         mProgressDialog.dismiss();
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        UserListingActivity.startActivity(this,
-                Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent intent = new Intent(this,AccountPage.class);
+        startActivity(intent);
+        //UserListingActivity.startActivity(this, Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
     @Override
