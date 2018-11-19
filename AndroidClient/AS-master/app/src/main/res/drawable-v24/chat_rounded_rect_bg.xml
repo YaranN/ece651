@@ -7,6 +7,5 @@
         android:color="@color/bubble_other" />
     <stroke
         android:color="@color/bubble_border"
-        android:width="@dimen/bubble_edge"/>
-
+        android:width="@dimen/post_image"/>
 </shape>

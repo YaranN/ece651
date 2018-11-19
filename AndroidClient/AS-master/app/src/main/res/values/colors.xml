@@ -3,6 +3,7 @@
     <color name="colorPrimary">#48b959</color>
     <color name="colorPrimaryDark">#080808</color>
 
+    <color name="black">#080808</color>
 
     <color name="colorAccent">#D81B60</color>
     <color name="divide">#a3d27d</color>
@@ -31,5 +32,7 @@
     <color name="button_logout">#bf2f36</color>
     <color name="button_message">#897dc9</color>
     <color name="button_myPosts">#a7a6af</color>
+
+    <color name="post_topic">#a69f9f</color>
 
 </resources>

@@ -28,6 +28,7 @@ public class ShowOtherProfileActivity extends AppCompatActivity {
             getFragmentManager().beginTransaction().replace(R.id.fragment_container_showpreference, ineditableProfileSettingFragment).addToBackStack(null).commit();
         }
         toolbar = findViewById(R.id.default_toolBar);
+        toolbar.setTitle("Personal Info");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

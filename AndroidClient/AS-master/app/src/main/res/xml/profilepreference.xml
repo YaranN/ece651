@@ -4,7 +4,7 @@
         android:key="USER"
         android:title="USER">
         <EditTextPreference
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_user_name_24dp"
             android:key="username"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -12,7 +12,7 @@
             android:title="User Name" />
 
         <EditTextPreference
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_email"
             android:key="email"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -20,7 +20,7 @@
             android:title="E-Mail" />
 
         <ListPreference
-            android:icon="@drawable/login_dialog"
+            android:icon="@drawable/ic_gender"
             android:title="Gender"
             android:key = "gender"
             android:entries="@array/gender"
@@ -29,18 +29,27 @@
 
 
         <ListPreference
-            android:icon="@drawable/login_dialog"
+            android:icon="@drawable/ic_country"
             android:title="Nationality"
             android:key = "nationality"
             android:entries="@array/nationalities"
             android:entryValues="@array/nationalities"
              />
+        <EditTextPreference
+            android:icon="@drawable/ic_thumb_up_black"
+            android:key="rewards"
+            android:enabled="false"
+            android:persistent="false"
+            android:shouldDisableView="false"
+            android:singleLine="true"
+            android:summary="0"
+            android:title="Rewards" />
     </PreferenceCategory>
     <PreferenceCategory
             android:key="Academic"
             android:title="Academic Background">
             <ListPreference
-                android:icon="@drawable/login_dialog"
+                android:icon="@drawable/ic_major"
                 android:title="Major"
                 android:key = "major"
                 android:entries="@array/subjects"
@@ -48,7 +57,7 @@
                 />
 
             <ListPreference
-                android:icon="@drawable/login_dialog"
+                android:icon="@drawable/ic_degree"
                 android:title="Degree"
                 android:key = "degree"
                 android:entries="@array/degree"
@@ -56,7 +65,7 @@
                 />
 
             <MultiSelectListPreference
-                android:icon="@drawable/login_dialog"
+                android:icon="@drawable/ic_schools"
                 android:title="University"
                 android:key = "University"
                 android:entries="@array/Schools"
@@ -64,7 +73,7 @@
                 ></MultiSelectListPreference>
 
         <MultiSelectListPreference
-            android:icon="@drawable/login_dialog"
+            android:icon="@drawable/ic_advantage"
             android:title="Advantages"
             android:key = "advantages"
             android:entries="@array/subjects"
@@ -76,7 +85,7 @@
         android:title="Signature">
         <EditTextPreference
             android:defaultValue="Nothing"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_signature"
             android:key="signature"
             android:selectAllOnFocus="true"
             android:singleLine="false"

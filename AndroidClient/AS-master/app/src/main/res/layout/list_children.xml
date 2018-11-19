@@ -18,10 +18,12 @@
         <Button
             android:id="@+id/bt_accept"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:padding="8dp"
-            android:background="@color/divide"
+            android:layout_margin="@dimen/space_min"
+            android:background="@drawable/round_edge_button"
             android:text="Accept"
+            android:textStyle="bold"
             />
     </LinearLayout>
 </android.support.v7.widget.CardView>

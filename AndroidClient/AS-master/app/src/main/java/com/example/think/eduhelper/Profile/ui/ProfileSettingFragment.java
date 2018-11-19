@@ -1,5 +1,6 @@
 package com.example.think.eduhelper.Profile.ui;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
@@ -8,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.preference.PreferenceFragment;
 import android.preference.Preference;
 import android.support.v7.preference.EditTextPreference;
+import android.text.TextUtils;
 import android.util.Pair;
 import android.view.View;
 import android.widget.Toast;
@@ -18,7 +20,9 @@ import com.example.think.eduhelper.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 public class ProfileSettingFragment extends PreferenceFragment implements UpdateProfileContract.View {
     private Preference editTextPreference;
@@ -48,12 +52,17 @@ public class ProfileSettingFragment extends PreferenceFragment implements Update
                 android.preference.Preference preference = findPreference(key);
                 if(!(preference instanceof MultiSelectListPreference)) {
                     String preferences = sharedPreferences.getString(key, "message perconversion");
-
                     //interactor database operation
+                    preference.setSummary(preferences);
                     mUpdateProfilePresenter.updateProfile(getActivity(), firebaseUser.getUid(), key, preferences);
 
+                } else{
+                    // for multiselected preference join items
+                    String preferences = getMultiSelectedPreference(sharedPreferences.getStringSet(key, null));
                     preference.setSummary(preferences);
+                    mUpdateProfilePresenter.updateProfile(getActivity(), firebaseUser.getUid(), key, preferences);
                 }
+
             }
         };
     }
@@ -96,5 +105,15 @@ public class ProfileSettingFragment extends PreferenceFragment implements Update
             preference.setSummary(infoPair.second);
         }
     }
+
+    public String getMultiSelectedPreference(Set<String> value) {
+        List<String> summaryList = new ArrayList<>();
+        for (String str : value) {
+            summaryList.add(str);
+        }
+        String summary = TextUtils.join(", ", summaryList);
+        return summary;
+    }
+
 
 }
