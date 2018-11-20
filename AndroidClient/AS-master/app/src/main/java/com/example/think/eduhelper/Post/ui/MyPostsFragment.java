@@ -80,7 +80,7 @@ public class MyPostsFragment extends Fragment implements GetPostConstractor.View
 
     @Override
     public void onRefresh() {
-
+        getMyPosts();
     }
 
     @Override

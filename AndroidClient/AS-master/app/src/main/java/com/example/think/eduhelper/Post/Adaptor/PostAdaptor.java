@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
 import com.example.think.eduhelper.Chat.models.User;
+import com.example.think.eduhelper.Chat.utils.Constants;
 import com.example.think.eduhelper.Post.core.addPost.AddPostContractor;
 import com.example.think.eduhelper.Post.core.addPost.AddPostPresenter;
 import com.example.think.eduhelper.Post.model.ItemView.TitleChild;
@@ -81,14 +82,18 @@ implements AddPostContractor.View{
     @Override
     public void onBindChildViewHolder(@NonNull com.example.think.eduhelper.Post.ui.ViewHolder_Posts.ChildViewHolder childViewHolder, final int parentPosition, int childPosition, @NonNull TitleChild child) {
         final TitleChild titleChild = child;
+
         childViewHolder.detailText.setText(titleChild.getDetailText());
         childViewHolder.accept.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Post post = posts.get(parentPosition);
                 Toast.makeText(context, "You have selected "+posts.get(parentPosition).getTitle(), Toast.LENGTH_SHORT).show();
-                post.setStatus(true);
-                mAddPostPresenter.addSelectedPost(context,post);
+                //post.setStatus(true);
+                User user = new User(firebaseUser.getUid(),firebaseUser.getEmail(),Constants.ARG_FIREBASE_TOKEN);
+                post.addAcceptors(user);
+                //mAddPostPresenter.addSelectedPost(context,post);
+                mAddPostPresenter.addPost(context,post);
             }
         });
     }

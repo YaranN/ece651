@@ -2,6 +2,7 @@ package com.example.think.eduhelper.Post.Adaptor;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -12,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
+import com.example.think.eduhelper.Chat.utils.Constants;
 import com.example.think.eduhelper.Post.ui.ClosePostDialog;
 import com.example.think.eduhelper.Post.core.addPost.AddPostContractor;
 import com.example.think.eduhelper.Post.core.addPost.AddPostPresenter;
@@ -19,6 +21,7 @@ import com.example.think.eduhelper.Post.model.ItemView.TitleChildMy;
 import com.example.think.eduhelper.Post.model.ItemView.TitleParentMy;
 
 import com.example.think.eduhelper.Post.model.Post;
+import com.example.think.eduhelper.Post.ui.EditPostActivity;
 import com.example.think.eduhelper.Post.ui.ViewHolder_Posts.EditMyPostChildViewHolder;
 import com.example.think.eduhelper.Post.ui.EditPostFragment;
 import com.example.think.eduhelper.Post.ui.ViewHolder_Posts.TitleParentViewholder;
@@ -100,11 +103,14 @@ implements AddPostContractor.View{
             @Override
             public void onClick(View v) {
                 Post post = posts.get(parentPosition);
-                EditPostFragment editPostFragment=  EditPostFragment.newInstance(post.getCourse(),post.getTitle(),post.getContent(),post.getTopic(),(long)post.getTimestamp());
-                FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
-                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.my_posts_listing_container,editPostFragment,null).addToBackStack("EditFragment");
-                fragmentTransaction.commit();
+                //EditPostFragment editPostFragment=  EditPostFragment.newInstance(post.getCourse(),post.getTitle(),post.getContent(),post.getTopic(),(long)post.getTimestamp());
+                Intent intent = new Intent(context,EditPostActivity.class);
+                intent.putExtra(Constants.ARG_COURSE,post.getCourse());
+                intent.putExtra(Constants.ARG_TITLE,post.getTitle());
+                intent.putExtra(Constants.ARG_CONTENT,post.getContent());
+                intent.putExtra(Constants.ARG_TOPIC,post.getTopic());
+                intent.putExtra(Constants.ARG_TIMESTAMP,post.getTimestamp());
+                context.startActivity(intent);
             }
         });
     }

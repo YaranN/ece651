@@ -21,6 +21,8 @@ import com.example.think.eduhelper.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -61,7 +63,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, AddP
         String post_topic = topic.getText().toString();
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         User user = new User(firebaseUser.getUid(),firebaseUser.getEmail(),Constants.ARG_FIREBASE_TOKEN);
-        Post post = new Post(post_course, post_title,post_detail, firebaseUser.getUid(),System.currentTimeMillis(),post_topic, user);
+        Post post = new Post(post_course, post_title,post_detail, firebaseUser.getUid(),System.currentTimeMillis(),post_topic, user,new ArrayList<User>());
         if (post_course.isEmpty() || post_title.isEmpty() || post_detail.isEmpty()) {
             Toast.makeText(getActivity(), "Please complete information", Toast.LENGTH_SHORT).show();
         } else {

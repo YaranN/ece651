@@ -2,6 +2,7 @@ package com.example.think.eduhelper.Post.ui;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -20,6 +21,9 @@ import com.example.think.eduhelper.Post.model.Post;
 import com.example.think.eduhelper.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -91,6 +95,7 @@ public class EditPostFragment extends Fragment implements View.OnClickListener, 
     public void onAddPostSuccess(String message) {
         mProgressDialog.dismiss();
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(getContext(),MyPostsActivity.class));
     }
 
     @Override
@@ -112,9 +117,9 @@ public class EditPostFragment extends Fragment implements View.OnClickListener, 
         String post_title = edit_title.getText().toString();
         String post_detail = edit_content.getText().toString();
         String post_topic = edit_topic.getText().toString();
-
+        //List<String> acceptors =
         User user = new User(firebaseUser.getUid(),firebaseUser.getEmail(),Constants.ARG_FIREBASE_TOKEN);
-        Post post = new Post(post_course, post_title, post_detail, firebaseUser.getUid(),timestamp,post_topic, user);
+        Post post = new Post(post_course, post_title, post_detail, firebaseUser.getUid(),timestamp,post_topic, user,new ArrayList<User>());
         if (post_course.isEmpty() || post_title.isEmpty() || post_detail.isEmpty()) {
             Toast.makeText(getActivity(), "Please complete information", Toast.LENGTH_SHORT).show();
         } else {

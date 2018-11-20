@@ -2,14 +2,32 @@ package com.example.think.eduhelper.Post.model;
 
 import com.example.think.eduhelper.Chat.models.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Post {
     private String course;
+    private User user;
+    private String title;
+    private String content;
+    private String uid;
+    public long timestamp;
+    private String topic;
+    private boolean status = false;
+    private List<User> acceptors;
+
+    public List<User> getAcceptors() {
+        return acceptors;
+    }
+
+    public void addAcceptors(User user){
+        acceptors.add(user);
+    }
 
     public User getUser() {
         return user;
     }
 
-    private User user;
 
     public String getCourse() {
         return course;
@@ -32,31 +50,25 @@ public class Post {
         return status;
     }
 
-    private String title;
-    private String content;
-    private String uid;
 
     public String getTopic() {
         return topic;
     }
 
-    private String topic;
 
     public long getTimestamp() {
         return timestamp;
     }
 
-    public long timestamp;
 
     public void setStatus(boolean status) {
         this.status = status;
     }
 
-    private boolean status = false;
 
     public Post(){}
 
-    public Post(String course, String title, String content, String uid, long timestamp, String topic, User user) {
+    public Post(String course, String title, String content, String uid, long timestamp, String topic, User user, List<User> acceptors) {
         this.course = course;
         this.title = title;
         this.content = content;
@@ -64,6 +76,8 @@ public class Post {
         this.timestamp = timestamp;
         this.topic = topic;
         this.user = user;
+        this.acceptors = acceptors;
+        acceptors.add(user);
     }
 
 

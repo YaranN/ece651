@@ -43,8 +43,11 @@
         <activity
             android:name=".Post.ui.MyPostsActivity"
             android:parentActivityName=".AccountPage" />
-        <activity android:name=".Profile.ui.ShowOtherProfileActivity"
-            android:parentActivityName=".ChattingActivity"></activity>
+        <activity
+            android:name=".Profile.ui.ShowOtherProfileActivity"
+            android:parentActivityName=".ChattingActivity" />
+        <activity android:name=".Post.ui.EditPostActivity"
+            android:parentActivityName=".Post.ui.MyPostsActivity"></activity>
     </application>
 
 </manifest>
