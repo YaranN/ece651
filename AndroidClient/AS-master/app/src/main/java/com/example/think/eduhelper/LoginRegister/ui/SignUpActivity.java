@@ -46,8 +46,8 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         name = findViewById(R.id.signupname);
         email = findViewById(R.id.signupemail);
         password = findViewById(R.id.signuppassword);
-        toolbar = findViewById(R.id.default_toolBar);
-
+        toolbar = findViewById(R.id.toolbar_register);
+        toolbar.setTitle("Register");
         // enable the backward
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

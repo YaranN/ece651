@@ -10,7 +10,7 @@
         android:id="@+id/toolbar_post_listing"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@drawable/actionbar"
         app:popupTheme="@style/AppTheme.PopupOverlay"
         app:title="Post" />
     <FrameLayout

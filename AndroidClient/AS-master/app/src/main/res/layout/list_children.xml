@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:layout_margin="@dimen/space_min"
-            android:background="@drawable/round_edge_button"
+            android:background="@drawable/round_edge_button_login"
             android:text="Accept"
             android:textStyle="bold"
             />

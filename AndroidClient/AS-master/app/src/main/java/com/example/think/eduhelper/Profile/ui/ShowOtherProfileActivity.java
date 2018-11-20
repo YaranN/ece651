@@ -27,7 +27,7 @@ public class ShowOtherProfileActivity extends AppCompatActivity {
             ineditableProfileSettingFragment.setUID(uid);
             getFragmentManager().beginTransaction().replace(R.id.fragment_container_showpreference, ineditableProfileSettingFragment).addToBackStack(null).commit();
         }
-        toolbar = findViewById(R.id.default_toolBar);
+        toolbar = findViewById(R.id.toolbar_profile_other);
         toolbar.setTitle("Personal Info");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);

@@ -15,7 +15,7 @@
         android:layout_width="100dp"
         android:layout_gravity="center"
         android:layout_marginTop="120dp"
-        android:src="@drawable/login_dialog"/>
+        android:src="@drawable/eduhelper"/>
     <Button
         android:id="@+id/bt_profile"
         android:layout_width="250dp"

@@ -34,7 +34,7 @@ public class ProfileSettingActivity extends AppCompatActivity {
             }
             getFragmentManager().beginTransaction().replace(R.id.fragment_container_preference, new ProfileSettingFragment()).commit();
         }
-        toolbar = findViewById(R.id.default_toolBar);
+        toolbar = findViewById(R.id.toolbar_profile);
         toolbar.setTitle("Profile Setting");
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
