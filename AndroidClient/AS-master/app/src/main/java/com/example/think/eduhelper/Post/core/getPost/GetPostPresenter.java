@@ -19,6 +19,11 @@ public class GetPostPresenter implements GetPostConstractor.Presenter, GetPostCo
     }
 
     @Override
+    public void getAcceptedPosts() {
+        mGetPostsInteractor.getAcceptedPostsFromFirebase();
+    }
+
+    @Override
     public void getMyPosts() {
         mGetPostsInteractor.getMyPostsFromFirebase();
     }

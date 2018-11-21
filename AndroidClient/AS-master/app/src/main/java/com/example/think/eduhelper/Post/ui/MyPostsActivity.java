@@ -32,7 +32,7 @@ public class MyPostsActivity extends AppCompatActivity {
         viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         viewPagerAdapter.addFragments(new MyPostsFragment(), "My Posts");
-        viewPagerAdapter.addFragments(new PostListingFragment(),"All posts");
+        viewPagerAdapter.addFragments(new ListAcceptedPostFragment(),"Accepted posts");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 

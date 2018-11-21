@@ -72,10 +72,7 @@ public class PostFragment extends Fragment implements View.OnClickListener, AddP
             //mRegisterPresenter.register(SignUpActivity.this, userEmail, userPassword);
         }
         Toast.makeText(getActivity(), "Please complete information", Toast.LENGTH_SHORT).show();
-
-
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

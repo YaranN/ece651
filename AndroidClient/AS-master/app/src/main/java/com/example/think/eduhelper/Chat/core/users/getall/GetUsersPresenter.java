@@ -6,7 +6,7 @@ import com.example.think.eduhelper.Post.core.getPost.GetPostConstractor;
 import java.util.List;
 
 
-public class GetUsersPresenter implements GetUsersContract.Presenter, GetUsersContract.OnGetAllUsersListener, GetUsersContract.OnGetSelectedUsersListener {
+public class GetUsersPresenter implements GetUsersContract.Presenter, GetUsersContract.OnGetAllUsersListener {
     private GetUsersContract.View mView;
     private GetUsersInteractor mGetUsersInteractor;
 
@@ -18,6 +18,11 @@ public class GetUsersPresenter implements GetUsersContract.Presenter, GetUsersCo
     @Override
     public void getAllUsers() {
         mGetUsersInteractor.getAllUsersFromFirebase();
+    }
+
+    @Override
+    public void getHelpers() {
+        mGetUsersInteractor.getHelpersFromFirebase();
     }
 
     @Override
@@ -35,14 +40,4 @@ public class GetUsersPresenter implements GetUsersContract.Presenter, GetUsersCo
         mView.onGetAllUsersFailure(message);
     }
 
-    @Override
-    public void onGetSelectedUsersSuccess(List<User> users) {
-        mView.onGetSelectedUsersSuccess(users);
-    }
-
-    @Override
-    public void onGetSelectedUsersFailure(String message) {
-        mView.onGetSelectedUsersFailure(message);
-
-    }
 }

@@ -17,9 +17,15 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class AddPostInteractor implements AddPostContractor.Interactor {
     private AddPostContractor.OnPostDatabaseListener mOnPostDatabaseListener;
+    private User currUser;
 
     public AddPostInteractor(AddPostContractor.OnPostDatabaseListener mOnPostDatabaseListener) {
         this.mOnPostDatabaseListener = mOnPostDatabaseListener;
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        String userID = firebaseUser.getUid();
+        String userEmail = firebaseUser.getEmail();
+        String databaseToken = Constants.ARG_FIREBASE_TOKEN;
+        currUser = new User(userID,userEmail,databaseToken);
     }
 
     @Override
@@ -43,18 +49,13 @@ public class AddPostInteractor implements AddPostContractor.Interactor {
     @Override
     public void addSelectedPostToDatabase(final Context context, Post post) {
         // firstly add the selected post into accepted -> currUserID ->(Post containing posters' information)
-        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        String userID = firebaseUser.getUid();
-        String userEmail = firebaseUser.getEmail();
-        String databaseToken = Constants.ARG_FIREBASE_TOKEN;
-        User currUser = new User(userID,userEmail,databaseToken);
         DatabaseReference database = FirebaseDatabase.getInstance().getReference();
         // excluded those who want to accept their own post
         if(!TextUtils.equals(post.getUid(), FirebaseAuth.getInstance().getCurrentUser().getUid())){
             database.child(Constants.ARG_SELECTED_POSTS)
-                    .child(userID)
+                    .child(currUser.uid)
                     .child(post.getUid()+"_"+post.getTimestamp())
-                    .setValue(post.getUser())
+                    .setValue(post)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
@@ -66,33 +67,10 @@ public class AddPostInteractor implements AddPostContractor.Interactor {
                         }
                     });
 
-            // add current user to the database of posters' message list, may rearrange the structure here
-            // to avoid duplication
-            database.child(Constants.ARG_SELECTED_POSTS)
-                    .child(post.getUid())
-                    .child(post.getUid()+"_"+post.getTimestamp())
-                    .setValue(currUser)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                mOnPostDatabaseListener.onSuccess(context.getString(R.string.Add_to_poster_list_successfully));
-                            } else {
-                                mOnPostDatabaseListener.onFailure(context.getString(R.string.Add_to_poster_list_fail));
-                            }
-                        }
-                    });
         }else
             {
                 mOnPostDatabaseListener.onFailure(context.getString(R.string.add_my_post_failure));
             }
-        // secondly add the currUser using tutors -> postersUID -> currUser
-        /*User tutor = new User(userID, userEmail, databaseToken);
-        database.child(Constants.ARG_SELECTED_POSTS)
-                .child(post.getUid())
-                .child(post.getUid()+"_"+post.getTimestamp())
-                .child().setValue(tutor);
-                */
     }
 
     @Override

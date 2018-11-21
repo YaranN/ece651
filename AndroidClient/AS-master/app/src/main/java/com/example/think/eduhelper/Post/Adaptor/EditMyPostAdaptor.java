@@ -94,7 +94,7 @@ implements AddPostContractor.View{
                 closePostDialog.init(mAddPostPresenter,context,post);
                 FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
                 closePostDialog.show(fragmentManager, "Open the cancel dialog...");
-                //mAddPostPresenter.updatePostStatus(context,post);
+                mAddPostPresenter.updatePostStatus(context,post);
 
             }
         });

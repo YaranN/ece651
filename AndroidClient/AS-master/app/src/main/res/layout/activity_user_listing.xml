@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -11,10 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:elevation="0dp">
+        android:id="@+id/userListingBar"
+        app:elevation="0dp"
+        android:layout_alignParentTop="true">
 
         <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
+            android:id="@+id/toolbar_user_listing"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@drawable/actionbar"
@@ -25,29 +27,23 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <LinearLayout
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tab_layout_user_listing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/userListingBar"
+        android:background="@drawable/round_edge_button"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/red"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/tab_selected"
+        app:tabTextColor="@color/tab_unselected" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager_user_listing"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:layout_below="@+id/tab_layout_user_listing"
+        android:layout_alignParentBottom="true" />
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout_user_listing"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:tabBackground="?attr/colorPrimary"
-            app:tabGravity="fill"
-            app:tabIndicatorColor="@color/red"
-            app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/bubble_mine"
-            app:tabTextColor="@color/bubble_mine" />
-
-        <android.support.v4.view.ViewPager
-            android:id="@+id/view_pager_user_listing"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
-
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

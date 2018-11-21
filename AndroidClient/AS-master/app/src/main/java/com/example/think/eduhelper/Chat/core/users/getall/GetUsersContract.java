@@ -17,13 +17,14 @@ public interface GetUsersContract {
 
     interface Presenter {
         void getAllUsers();
-
+        void getHelpers();
         void getSelectedUsers();
     }
 
     interface Interactor {
         void getAllUsersFromFirebase();
 
+        void getHelpersFromFirebase();
         void getSelectedUsersFromFirebase();
     }
 
@@ -31,11 +32,5 @@ public interface GetUsersContract {
         void onGetAllUsersSuccess(List<User> users);
 
         void onGetAllUsersFailure(String message);
-    }
-
-    interface OnGetSelectedUsersListener {
-        void onGetSelectedUsersSuccess(List<User> users);
-
-        void onGetSelectedUsersFailure(String message);
     }
 }

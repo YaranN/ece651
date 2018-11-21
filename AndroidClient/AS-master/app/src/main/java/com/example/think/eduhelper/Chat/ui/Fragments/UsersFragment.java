@@ -24,8 +24,8 @@ import java.util.List;
 
 public class UsersFragment extends Fragment implements GetUsersContract.View, ItemClickSupport.OnItemClickListener, SwipeRefreshLayout.OnRefreshListener{
     public static final String ARG_TYPE = "type";
-    public static final String TYPE_CHATS = "type_chats";
-    public static final String TYPE_ALL = "type_all";
+    public static final String TYPE_RECEIVED = "type_received";
+    public static final String TYPE_ACCEPTED = "type_accepted";
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerViewAllUserListing;
@@ -83,9 +83,9 @@ public class UsersFragment extends Fragment implements GetUsersContract.View, It
     }
 
     private void getUsers() {
-        if (TextUtils.equals(getArguments().getString(ARG_TYPE), TYPE_CHATS)) {
-
-        } else if (TextUtils.equals(getArguments().getString(ARG_TYPE), TYPE_ALL)) {
+        if (TextUtils.equals(getArguments().getString(ARG_TYPE), TYPE_RECEIVED)) {
+            mGetUsersPresenter.getHelpers();
+        } else if (TextUtils.equals(getArguments().getString(ARG_TYPE), TYPE_ACCEPTED)) {
             mGetUsersPresenter.getSelectedUsers();
         }
     }

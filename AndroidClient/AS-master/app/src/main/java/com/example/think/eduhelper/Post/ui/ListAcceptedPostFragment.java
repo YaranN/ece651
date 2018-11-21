@@ -3,46 +3,40 @@ package com.example.think.eduhelper.Post.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.bignerdranch.expandablerecyclerview.ExpandableRecyclerAdapter;
-import com.bumptech.glide.util.Util;
-import com.example.think.eduhelper.Chat.models.User;
 import com.example.think.eduhelper.Chat.utils.ItemClickSupport;
+import com.example.think.eduhelper.Post.Adaptor.AcceptedPostAdaptor;
 import com.example.think.eduhelper.Post.Adaptor.EditMyPostAdaptor;
-import com.example.think.eduhelper.Post.Adaptor.PostAdaptor;
 import com.example.think.eduhelper.Post.core.getPost.GetPostConstractor;
 import com.example.think.eduhelper.Post.core.getPost.GetPostPresenter;
-import com.example.think.eduhelper.Post.model.ItemView.TitleChild;
+import com.example.think.eduhelper.Post.model.ItemView.TitleChildAccepted;
 import com.example.think.eduhelper.Post.model.ItemView.TitleChildMy;
-import com.example.think.eduhelper.Post.model.ItemView.TitleParent;
+import com.example.think.eduhelper.Post.model.ItemView.TitleParentAccepted;
 import com.example.think.eduhelper.Post.model.ItemView.TitleParentMy;
 import com.example.think.eduhelper.Post.model.Post;
-import com.example.think.eduhelper.Profile.ui.ProfileSettingFragment;
 import com.example.think.eduhelper.R;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyPostsFragment extends Fragment implements GetPostConstractor.View, SwipeRefreshLayout.OnRefreshListener,ItemClickSupport.OnItemClickListener {
+public class ListAcceptedPostFragment extends Fragment implements GetPostConstractor.View, SwipeRefreshLayout.OnRefreshListener,ItemClickSupport.OnItemClickListener {
     private RecyclerView mRecyclerViewMyPostsListing;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-    private EditMyPostAdaptor mPostsListingRecyclerAdapter;
+    private AcceptedPostAdaptor mPostsListingRecyclerAdapter;
     private GetPostPresenter mGetPostPresenter;
 
-    public MyPostsFragment() {
+    public ListAcceptedPostFragment() {
         // Required empty public constructor
     }
 
@@ -51,16 +45,16 @@ public class MyPostsFragment extends Fragment implements GetPostConstractor.View
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_my_posts, container, false);
+        // Inflate the layout for this fragment
+        View view =  inflater.inflate(R.layout.fragment_list_accepted_post, container, false);
         bindViews(view);
         init();
         return view;
     }
 
-
     private void bindViews(View view){
-        mRecyclerViewMyPostsListing = view.findViewById(R.id.myPost_listing_recyclerview);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_myPosts_layout);
+        mRecyclerViewMyPostsListing = view.findViewById(R.id.acceptedPosts_listing_recyclerview);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh_acceptedPosts_layout);
 
     }
 
@@ -72,19 +66,19 @@ public class MyPostsFragment extends Fragment implements GetPostConstractor.View
                 mSwipeRefreshLayout.setRefreshing(true);
             }
         });
-        getMyPosts();
+        getAcceptedPosts();
         mRecyclerViewMyPostsListing.setLayoutManager(new LinearLayoutManager(getContext()));
         mSwipeRefreshLayout.setOnRefreshListener(this);
 
     }
 
-    public void getMyPosts(){
-        mGetPostPresenter.getMyPosts();
+    public void getAcceptedPosts(){
+        mGetPostPresenter.getAcceptedPosts();
     }
 
     @Override
     public void onRefresh() {
-        getMyPosts();
+        getAcceptedPosts();
     }
 
     @Override
@@ -100,16 +94,16 @@ public class MyPostsFragment extends Fragment implements GetPostConstractor.View
                 mSwipeRefreshLayout.setRefreshing(false);
             }
         });
-        List<TitleParentMy> parents = new ArrayList<>();
+        List<TitleParentAccepted> parents = new ArrayList<>();
         for(Post post:posts){
             List<Object>  titleChildren = new ArrayList<>();
-            TitleParentMy parent = new TitleParentMy(post.getCourse(),post.getTitle(),post.getTopic());
-            TitleChildMy child = new TitleChildMy(post.getContent());
+            TitleParentAccepted parent = new TitleParentAccepted(post.getCourse(),post.getTitle(),post.getTopic());
+            TitleChildAccepted child = new TitleChildAccepted(post.getContent());
             titleChildren.add(child);
             parent.setChildrenList(titleChildren);
             parents.add(parent);
         }
-        mPostsListingRecyclerAdapter = new EditMyPostAdaptor(getContext(),parents,posts);
+        mPostsListingRecyclerAdapter = new AcceptedPostAdaptor(getContext(),parents,posts);
         mPostsListingRecyclerAdapter.setExpandCollapseListener(new ExpandableRecyclerAdapter.ExpandCollapseListener(){
             @Override
             public void onParentExpanded(int parentPosition) {
@@ -120,9 +114,7 @@ public class MyPostsFragment extends Fragment implements GetPostConstractor.View
                 }else{
                     status = "still Open";
                 }
-                String helpers = getHelpers(post.getAcceptors());
-
-                Toast.makeText(getContext(),"Post is: "+ status +" Accepted by: "+ helpers,Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),"Posted by "+ post.getUser().email +" Current status: "+status,Toast.LENGTH_LONG).show();
 
             }
 
@@ -141,16 +133,4 @@ public class MyPostsFragment extends Fragment implements GetPostConstractor.View
     public void onGetAllPostsFailure(String message) {
 
     }
-
-
-
-    public String getHelpers(List<User> value) {
-        List<String> summaryList = new ArrayList<>();
-        for (User user : value) {
-            summaryList.add(user.email);
-        }
-        String helpers = TextUtils.join(", ", summaryList);
-        return helpers;
-    }
-
 }

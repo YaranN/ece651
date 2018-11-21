@@ -23,6 +23,8 @@
         app:tabGravity="fill"
         app:tabIndicatorColor="@color/red"
         android:background="@drawable/round_edge_button"
+        app:tabSelectedTextColor="@color/tab_selected"
+        app:tabTextColor="@color/tab_unselected"
         ></android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager

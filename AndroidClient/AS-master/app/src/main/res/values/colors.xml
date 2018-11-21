@@ -35,4 +35,8 @@
 
     <color name="post_topic">#a69f9f</color>
 
+    <color name="tab_unselected">#ffa305</color>
+    <color name="tab_selected">#ffee05</color>
+
+
 </resources>

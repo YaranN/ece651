@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -13,18 +14,22 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.think.eduhelper.Chat.ui.Adapters.UserListingPagerAdapter;
+import com.example.think.eduhelper.Chat.ui.Fragments.UsersFragment;
+import com.example.think.eduhelper.Post.ui.ListAcceptedPostFragment;
+import com.example.think.eduhelper.Post.ui.MyPostsFragment;
 import com.example.think.eduhelper.R;
+import com.example.think.eduhelper.ViewPagerAdapter;
 
 
 public class UserListingActivity extends AppCompatActivity{
     private Toolbar mToolbar;
     private TabLayout mTabLayoutUserListing;
     private ViewPager mViewPagerUserListing;
+    private ViewPagerAdapter viewPagerAdapter;
+
 
 
     public static void startActivity(Context context) {
-        Toast.makeText(context,"I came here once！",Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(context, UserListingActivity.class);
         context.startActivity(intent);
     }
@@ -44,9 +49,17 @@ public class UserListingActivity extends AppCompatActivity{
     }
 
     private void bindViews() {
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+        mToolbar = (Toolbar) findViewById(R.id.toolbar_user_listing);
         mTabLayoutUserListing = (TabLayout) findViewById(R.id.tab_layout_user_listing);
         mViewPagerUserListing = (ViewPager) findViewById(R.id.view_pager_user_listing);
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        UsersFragment acceptedFragment = UsersFragment.newInstance(UsersFragment.TYPE_ACCEPTED);
+        UsersFragment receivedFragment = UsersFragment.newInstance(UsersFragment.TYPE_RECEIVED);
+        viewPagerAdapter.addFragments(acceptedFragment, "Accepted");
+        viewPagerAdapter.addFragments(receivedFragment,"Received");
+
+        mViewPagerUserListing.setAdapter(viewPagerAdapter);
+        mTabLayoutUserListing.setupWithViewPager(mViewPagerUserListing);
     }
 
     private void init() {
@@ -54,12 +67,6 @@ public class UserListingActivity extends AppCompatActivity{
         setSupportActionBar(mToolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        // set the view pager adapter
-        UserListingPagerAdapter userListingPagerAdapter = new UserListingPagerAdapter(getSupportFragmentManager());
-        mViewPagerUserListing.setAdapter(userListingPagerAdapter);
-
-        // attach tab layout with view pager
-        mTabLayoutUserListing.setupWithViewPager(mViewPagerUserListing);
     }
 
     @Override

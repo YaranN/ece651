@@ -13,7 +13,7 @@ public interface GetPostConstractor {
 
     interface Presenter {
         void getAllPosts();
-
+        void getAcceptedPosts();
         void getMyPosts();
 
     }
@@ -21,7 +21,7 @@ public interface GetPostConstractor {
     interface Interactor {
         // get
         void getAllPostsFromFirebase();
-
+        void getAcceptedPostsFromFirebase();
         void getMyPostsFromFirebase();
 
 

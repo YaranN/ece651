@@ -15,7 +15,6 @@ import com.google.firebase.auth.FirebaseAuth;
 public class AccountPage extends AppCompatActivity implements View.OnClickListener {
     private Button bt_profile;
     private Button bt_seek;
-    private Button bt_missions;
     private Button bt_logout;
     private Button bt_message;
     private Button bt_myPosts;
@@ -31,8 +30,7 @@ public class AccountPage extends AppCompatActivity implements View.OnClickListen
         bt_seek = findViewById(R.id.bt_seekOrhelp);
         bt_seek.setOnClickListener(this);
 
-        bt_missions  = findViewById(R.id.bt_missions);
-        bt_missions.setOnClickListener(this);
+
 
         bt_logout  = findViewById(R.id.bt_logOut);
         bt_logout.setOnClickListener(this);
@@ -52,9 +50,6 @@ public class AccountPage extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.bt_seekOrhelp:
                 startActivity(new Intent(this,PostsListingActivity.class));
-                break;
-            case R.id.bt_missions:
-                startActivity(new Intent(this,UserListingActivity.class));
                 break;
             case R.id.bt_logOut:
                 // signing out here

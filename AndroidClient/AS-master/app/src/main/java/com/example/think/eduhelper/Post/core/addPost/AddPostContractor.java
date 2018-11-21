@@ -14,6 +14,7 @@ public interface AddPostContractor {
         void addPost(Context context, Post post);
         void addSelectedPost(Context context, Post post);
 
+
         void updatePostStatus(Context context, Post post);
     }
 
