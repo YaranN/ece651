@@ -65,9 +65,17 @@ implements AddPostContractor.View{
 
     @NonNull
     @Override
-    public com.example.think.eduhelper.Post.ui.ViewHolder_Posts.EditMyPostChildViewHolder onCreateChildViewHolder(@NonNull ViewGroup childViewGroup, int viewType) {
-        View view = layoutInflater.inflate(R.layout.list_my_posts_children, childViewGroup, false);
-        return new com.example.think.eduhelper.Post.ui.ViewHolder_Posts.EditMyPostChildViewHolder(view);
+    public EditMyPostChildViewHolder onCreateChildViewHolder(@NonNull ViewGroup childViewGroup, int viewType) {
+        View view;
+        switch (viewType){
+            case R.layout.list_my_posts_children_closed:
+                view =  layoutInflater.inflate(R.layout.list_my_posts_children_closed, childViewGroup, false);
+                break;
+            default:
+                view =  layoutInflater.inflate(R.layout.list_my_posts_children, childViewGroup, false);
+                break;
+        }
+        return new EditMyPostChildViewHolder(view);
     }
 
     @Override
@@ -113,6 +121,16 @@ implements AddPostContractor.View{
                 context.startActivity(intent);
             }
         });
+    }
+
+
+    @Override
+    public int getChildViewType(int parentPosition, int childPosition) {
+        Boolean status = posts.get(parentPosition).isStatus();
+        if(status){
+            return R.layout.list_my_posts_children_closed;
+        }
+        return R.layout.list_my_posts_children;
     }
 
     @Override
