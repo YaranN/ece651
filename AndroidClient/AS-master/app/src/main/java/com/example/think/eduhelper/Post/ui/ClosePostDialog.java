@@ -62,6 +62,7 @@ public class ClosePostDialog extends DialogFragment {
         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                post.setStatus(true);
                 Toast.makeText(getActivity(),"Now editing the post status",Toast.LENGTH_SHORT).show();
                 mAddPostPresenter.updatePostStatus(context,post);
                 }

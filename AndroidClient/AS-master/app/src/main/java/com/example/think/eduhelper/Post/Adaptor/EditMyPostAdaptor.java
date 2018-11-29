@@ -96,13 +96,18 @@ implements AddPostContractor.View{
             @Override
             public void onClick(View v) {
                 Post post = posts.get(parentPosition);
-                Toast.makeText(context, "Edit operation in EditMyPostAdaptor.onBindChildViewHolder", Toast.LENGTH_SHORT).show();
-                post.setStatus(true);
-                ClosePostDialog closePostDialog = new ClosePostDialog();
-                closePostDialog.init(mAddPostPresenter,context,post);
-                FragmentManager fragmentManager = ((AppCompatActivity)context).getSupportFragmentManager();
-                closePostDialog.show(fragmentManager, "Open the cancel dialog...");
-                mAddPostPresenter.updatePostStatus(context,post);
+                //Toast.makeText(context, "Edit operation in EditMyPostAdaptor.onBindChildViewHolder", Toast.LENGTH_SHORT).show();
+                if(!post.isStatus()) {
+                    //post.setStatus(true);
+                    ClosePostDialog closePostDialog = new ClosePostDialog();
+                    closePostDialog.init(mAddPostPresenter, context, post);
+                    FragmentManager fragmentManager = ((AppCompatActivity) context).getSupportFragmentManager();
+                    closePostDialog.show(fragmentManager, "Open the cancel dialog...");
+                }
+                else{
+                    Toast.makeText(context,R.string.closed_post_warning,Toast.LENGTH_SHORT).show();
+                }
+                //mAddPostPresenter.updatePostStatus(context,post);
 
             }
         });
@@ -112,12 +117,13 @@ implements AddPostContractor.View{
             public void onClick(View v) {
                 Post post = posts.get(parentPosition);
                 //EditPostFragment editPostFragment=  EditPostFragment.newInstance(post.getCourse(),post.getTitle(),post.getContent(),post.getTopic(),(long)post.getTimestamp());
-                Intent intent = new Intent(context,EditPostActivity.class);
-                intent.putExtra(Constants.ARG_COURSE,post.getCourse());
-                intent.putExtra(Constants.ARG_TITLE,post.getTitle());
-                intent.putExtra(Constants.ARG_CONTENT,post.getContent());
-                intent.putExtra(Constants.ARG_TOPIC,post.getTopic());
-                intent.putExtra(Constants.ARG_TIMESTAMP,post.getTimestamp());
+
+                Intent intent = new Intent(context, EditPostActivity.class);
+                intent.putExtra(Constants.ARG_COURSE, post.getCourse());
+                intent.putExtra(Constants.ARG_TITLE, post.getTitle());
+                intent.putExtra(Constants.ARG_CONTENT, post.getContent());
+                intent.putExtra(Constants.ARG_TOPIC, post.getTopic());
+                intent.putExtra(Constants.ARG_TIMESTAMP, post.getTimestamp());
                 context.startActivity(intent);
             }
         });
