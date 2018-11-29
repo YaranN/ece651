@@ -93,7 +93,7 @@ implements AddPostContractor.View{
                 User user = new User(firebaseUser.getUid(),firebaseUser.getEmail(),Constants.ARG_FIREBASE_TOKEN);
                 post.addAcceptors(user);
                 mAddPostPresenter.addSelectedPost(context,post);
-                //mAddPostPresenter.addPost(context,post);
+                mAddPostPresenter.updatePostStatus(context,post);
             }
         });
     }

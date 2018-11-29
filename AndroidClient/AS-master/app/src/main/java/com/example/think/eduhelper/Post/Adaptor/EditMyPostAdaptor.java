@@ -124,6 +124,7 @@ implements AddPostContractor.View{
     }
 
 
+
     @Override
     public int getChildViewType(int parentPosition, int childPosition) {
         Boolean status = posts.get(parentPosition).isStatus();
